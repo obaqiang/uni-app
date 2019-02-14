@@ -1,0 +1,109 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页,
+		{
+			"path": "pages/chooslan/chooslan",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/homepage/homepage",
+			"style": {
+				"navigationBarTitleText": "智能仓储",
+				"titleNView": {
+					"buttons": [ //原生标题栏按钮配置,
+						{
+							"text": "\ue624",
+							"fontSrc": "/static/iconfont.ttf",
+							"fontSize": "22px",
+							"float": "right"
+						}
+					]
+				}
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+
+			}
+		},
+		{
+			"path": "pages/changePwd/changePwd",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"titleNView": {
+					"buttons": [ //原生标题栏按钮配置,
+						{
+							"text": "完成",
+							// "fontSrc": "/static/iconfont.ttf",
+							"fontSize": "15px",
+							"float": "right"
+						}
+					]
+				}
+			}
+		},
+
+		{
+			"path": "pages/morecountry/morecountry",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mylogin/mylogin",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/main/main",
+			"style": {
+				"navigationBarTitleText": "登录模板"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+			"path": "pages/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/pwd/pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码"
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#7a7e83",
+		"selectedColor": "#FFB700",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/homepage/homepage",
+			"text": "",
+			"iconPath": "static/img/home_unselected.png",
+			"selectedIconPath": "static/img/home_selected.png"
+		}, {
+			"pagePath": "pages/mine/mine",
+			"text": "",
+			"iconPath": "static/img/home_set_unselected.png",
+			"selectedIconPath": "static/img/home_set_selected.png"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#ffb700",
+		"backgroundColor": "#fbf9fe"
+	}
+}

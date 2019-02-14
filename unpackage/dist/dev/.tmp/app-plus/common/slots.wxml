@@ -1,0 +1,4 @@
+<import src="/pages/components/showModal/showModal.vue.wxml" />
+<import src="/pages/components/choServerModal/choServerModal.vue.wxml" />
+<import src="/pages/components/copyRightIntro/copyRightIntro.vue.wxml" />
+

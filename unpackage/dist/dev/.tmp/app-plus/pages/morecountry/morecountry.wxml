@@ -1,0 +1,2 @@
+<import src="./morecountry.vue.wxml" />
+    <template is="fc4dc474" data="{{ ...$root['0'], $root }}"/>
