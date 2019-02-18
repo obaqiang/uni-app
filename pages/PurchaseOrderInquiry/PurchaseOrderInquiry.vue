@@ -2,6 +2,10 @@
 	<view>
 	<PurchaseOrderInquiryHead v-if="PurchaseOrderInquiryHead_show"/>
 	<PurchaseOrderInquirybodyA v-if="PurchaseOrderInquirybodyA_show"/>
+	<PurchaseOrderInquirybodyB v-if="PurchaseOrderInquirybodyB_show"/>
+	<PurchaseOrderInquirybodyC v-if="PurchaseOrderInquirybodyC_show"/>
+	<PurchaseOrderInquirybodyD v-if="PurchaseOrderInquirybodyD_show"/>
+	<PurchaseOrderInquirybodyE v-if="PurchaseOrderInquirybodyE_show"/>
 	</view>
 	
 </template>
@@ -11,17 +15,28 @@
 	import PurchaseOrderInquiryHead from "../components/PurchaseOrderInquiryHead/PurchaseOrderInquiryHead.vue"
 	import PurchaseOrderInquirybodyA from "../components/PurchaseOrderInquirybodyA/PurchaseOrderInquirybodyA.vue"
 	import PurchaseOrderInquirybodyB from "../components/PurchaseOrderInquirybodyB/PurchaseOrderInquirybodyB.vue"
+	import PurchaseOrderInquirybodyC from "../components/PurchaseOrderInquirybodyC/PurchaseOrderInquirybodyC.vue"
+	import PurchaseOrderInquirybodyD from "../components/PurchaseOrderInquirybodyD/PurchaseOrderInquirybodyD.vue"
+	import PurchaseOrderInquirybodyE from "../components/PurchaseOrderInquirybodyE/PurchaseOrderInquirybodyE.vue"
 	export default {
 		components: {
 			PurchaseOrderInquiryHead,
 			PurchaseOrderInquirybodyA,
-			PurchaseOrderInquirybodyB
+			PurchaseOrderInquirybodyB,
+			PurchaseOrderInquirybodyC,
+			PurchaseOrderInquirybodyD,
+			PurchaseOrderInquirybodyE,
+			
 		},
 	
 		data() {
 			return {
-				PurchaseOrderInquiryHead_show:false,
-				PurchaseOrderInquirybodyA_show:true
+				PurchaseOrderInquiryHead_show:true,
+				PurchaseOrderInquirybodyA_show:false,
+				PurchaseOrderInquirybodyB_show:false,
+				PurchaseOrderInquirybodyC_show:false,
+				PurchaseOrderInquirybodyD_show:false,
+				PurchaseOrderInquirybodyE_show:false
 			};
 		},
 		onNavigationBarButtonTap() {
@@ -34,17 +49,7 @@
 		},
 	
 		methods: {
-			scanCode() {
-				uni.scanCode({
-					success: function(res) {
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
-					}
-				});
-			},
-			success() {
-				this.ifshowmodal = !this.ifshowmodal
-			},
+			
 		},
 		onLoad() {
 			

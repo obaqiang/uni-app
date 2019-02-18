@@ -1,0 +1,55 @@
+
+.BillOfMaterial_head_text{
+	padding: 20rpx;
+	font-weight: bold;
+	border-bottom: 1rpx solid #DDDDDD;
+}
+.BillOfMaterial_area{
+	overflow: hidden;
+	padding-left: 50rpx;
+}
+.BillOfMaterial_list{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	width: 170rpx;
+	float: left;
+	text-align: left;
+	font-size: 24rpx;
+	margin-top: 40rpx;
+}
+.BillOfMaterial_list_bg_line{
+	background: #e7e7e7;
+	height: 30rpx;
+	margin-top: 20rpx;
+}
+
+
+.head_area{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 750rpx;
+	border-bottom: 1rpx solid #DDDDDD;
+	line-height: 100rpx;
+}
+.head_area text{
+	width: 90rpx;
+	text-align: center;
+}
+.head_area text:nth-child(2){
+	width: 210rpx;
+	text-align: center;
+}
+.head_area text:nth-child(3){
+	width: 450rpx;
+	text-align: center;
+}
+

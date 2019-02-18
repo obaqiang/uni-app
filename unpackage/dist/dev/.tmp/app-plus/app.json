@@ -1,8 +1,16 @@
 {
   "pages": [
+    "pages/Outsourcing/Outsourcing",
+    "pages/OutgoingOperation/OutgoingOperation",
+    "pages/WarehousingOperation/WarehousingOperation",
+    "pages/DetailsOfDocuments/DetailsOfDocuments",
+    "pages/IncomingStorage/IncomingStorage",
+    "pages/DeliveryInventory/DeliveryInventory",
+    "pages/PurchaseOrderInquiry/PurchaseOrderInquiry",
     "pages/chooslan/chooslan",
     "pages/homepage/homepage",
     "pages/mine/mine",
+    "pages/changePwd/changePwd",
     "pages/morecountry/morecountry",
     "pages/mylogin/mylogin",
     "pages/main/main",
@@ -25,13 +33,13 @@
     "list": [
       {
         "pagePath": "pages/homepage/homepage",
-        "text": "首页",
+        "text": "",
         "iconPath": "static/img/home_unselected.png",
         "selectedIconPath": "static/img/home_selected.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "个人中心",
+        "text": "",
         "iconPath": "static/img/home_set_unselected.png",
         "selectedIconPath": "static/img/home_set_selected.png"
       }

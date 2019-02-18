@@ -1,5 +1,40 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页,
+	"pages": [{
+			"path": "pages/Outsourcing/Outsourcing",
+			"style": {
+				"navigationBarTitleText": "委外发料（审核）"
+			}
+		},
+		{
+			"path": "pages/OutgoingOperation/OutgoingOperation",
+			"style": {
+				"navigationBarTitleText": "出库作业"
+			}
+		},
+		{
+			"path": "pages/WarehousingOperation/WarehousingOperation",
+			"style": {
+				"navigationBarTitleText": "入库作业"
+			}
+		},
+		{
+			"path": "pages/DetailsOfDocuments/DetailsOfDocuments",
+			"style": {
+				"navigationBarTitleText": "单据详情"
+			}
+		},
+		{
+			"path": "pages/IncomingStorage/IncomingStorage",
+			"style": {
+				"navigationBarTitleText": "来料入库"
+			}
+		},
+		{
+			"path": "pages/DeliveryInventory/DeliveryInventory",
+			"style": {
+				"navigationBarTitleText": "送货及清点"
+			}
+		},
 		{
 			"path": "pages/PurchaseOrderInquiry/PurchaseOrderInquiry",
 			"style": {
