@@ -1,5 +1,54 @@
 {
 	"pages": [{
+			"path": "pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh",
+			"style": {
+				"navigationBarTitleText": "来料质检（高检）"
+			}
+		},
+		{
+			"path": "pages/IncomingQualityInspection/IncomingQualityInspection",
+			"style": {
+				"navigationBarTitleText": "来料质检（普检）"
+			}
+		},
+		{
+			"path": "pages/qualityInspection/qualityInspection",
+			"style": {
+				"navigationBarTitleText": "品质检验（来料）"
+			}
+		},
+		{
+			"path": "pages/StockCheck/StockCheck",
+			"style": {
+				"navigationBarTitleText": "库存查询"
+			}
+		},
+		{
+			"path": "pages/DetailsOfRejectionOrdersPurchase/DetailsOfRejectionOrdersPurchase",
+			"style": {
+				"navigationBarTitleText": "退料单详情（采购）"
+			}
+		},
+		{
+			"path": "pages/SingleWithdrawalPurchase/SingleWithdrawalPurchase",
+			"style": {
+				"navigationBarTitleText": "单个退料（采购）"
+			}
+		},
+
+		{
+			"path": "pages/ProcurementReclaim/ProcurementReclaim",
+			"style": {
+				"navigationBarTitleText": "采购退料"
+			}
+		},
+		{
+			"path": "pages/MaterialInventory/MaterialInventory",
+			"style": {
+				"navigationBarTitleText": "物料清点"
+			}
+		},
+		{
 			"path": "pages/Outsourcing/Outsourcing",
 			"style": {
 				"navigationBarTitleText": "委外发料（审核）"

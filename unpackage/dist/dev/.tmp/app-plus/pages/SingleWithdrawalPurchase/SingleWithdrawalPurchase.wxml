@@ -1,0 +1,2 @@
+<import src="./SingleWithdrawalPurchase.vue.wxml" />
+    <template is="192cccc2" data="{{ ...$root['0'], $root }}"/>

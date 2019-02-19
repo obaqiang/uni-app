@@ -1,0 +1,23 @@
+.common_bot_btn{
+	position: absolute;
+	width: 750upx;
+	height: 100upx;
+	line-height: 100upx;
+	color: #FFFFFF;
+	background: #FFB700;
+	text-align: center;
+}
+.common_area{
+	background: #FFFFFF;
+	width: 700upx;
+	display: block;
+	margin: 25upx;
+	border-radius: 10upx;
+}
+.common_title{
+	font-size: 28upx;
+	font-weight: bold;
+	border-bottom: 1px solid #DDDDDD;
+	line-height: 72upx;
+	padding-left: 30upx;
+}
