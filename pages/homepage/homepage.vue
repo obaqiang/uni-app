@@ -23,23 +23,23 @@
 		</view>
 
 		<view class="module_area">
-			<view class="module_list">
+			<view class="module_list" v-if="module_a" @tap="gotoWarehousingOperation">
 				<image class="module_list_icon" :src="home_in_stock"></image>
 				<text>入库作业</text>
 			</view>
-			<view class="module_list">
+			<view class="module_list" v-if="module_b" >
 				<image class="module_list_icon" :src="home_out_stock"></image>
-				<text>入库作业</text>
+				<text>出库作业</text>
 			</view>
-			<view class="module_list">
+			<view class="module_list" v-if="module_c">
 				<image class="module_list_icon" :src="home_stock_in_work"></image>
-				<text>入库作业</text>
+				<text>库内作业</text>
 			</view>
-			<view class="module_list">
+			<view class="module_list" v-if="module_d">
 				<image class="module_list_icon" :src="home_quality"></image>
-				<text>入库作业</text>
+				<text>质量作业</text>
 			</view>
-			<view class="module_list">
+			<view class="module_list" v-if="module_e">
 				<image class="module_list_icon" :src="home_query"></image>
 				<text>综合查询</text>
 			</view>
@@ -73,7 +73,14 @@
 				home_query: "../../static/img/home_query.png",
 				ifshowmodal: false,
 				show_modal_header: '这是header',
-				show_modal_body: '这是body'
+				show_modal_body: '这是body',
+				module_a: false,
+				module_b: false,
+				module_c: false,
+				module_d: false,
+				module_e: false,
+				childPermissions: '',
+
 			};
 		},
 		onNavigationBarButtonTap() {
@@ -102,6 +109,11 @@
 			success() {
 				this.ifshowmodal = !this.ifshowmodal
 			},
+			gotoWarehousingOperation(){
+				uni.navigateTo({
+					url: '../WarehousingOperation/WarehousingOperation'
+				});
+			}
 		},
 		onLoad() {
 			uni.setNavigationBarTitle({
@@ -116,18 +128,22 @@
 				text: this.i18n.homepage_bar_b,
 			})
 			console.log(this.i18n.homepage_title)
-			// 			uni.showModal({
-			// 				title: '提示',
-			// 				content: '这是一个模态弹窗',
-			// 				success: function(res) {
-			// 					if (res.confirm) {
-			// 						console.log('用户点击确定');
-			// 					} else if (res.cancel) {
-			// 						console.log('用户点击取消');
-			// 					}
-			// 				}
-			// 			});
-			// this.MacInfo();
+			let that = this
+			that.childPermissions = uni.getStorageSync('childPermissions')
+			console.log(that.childPermissions)
+			for (let i = 0; i < that.childPermissions.length; i++) {
+				if(that.childPermissions[i].permissionCode=='Pages.WPDA.InStock'){
+					that.module_a = true
+				}else if(that.childPermissions[i].permissionCode=='Pages.WPDA.OutStock'){
+					that.module_b = true
+				}else if(that.childPermissions[i].permissionCode=='Pages.WPDA.StockIn'){
+					that.module_c = true
+				}else if(that.childPermissions[i].permissionCode=='Pages.WPDA.QualityJob'){
+					that.module_d = true
+				}else if(that.childPermissions[i].permissionCode=='Pages.WPDA.IntegratedQuery'){
+					that.module_e = true
+				}
+			}
 
 		}
 	}

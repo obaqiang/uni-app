@@ -19,16 +19,19 @@
 				</view>
 				<button class="btn_login" @tap="bindLogin">{{ i18n.login_in_now }}</button>
 				<button class="btn_server" @tap="choServer">{{ i18n.configure_server }}</button>
-
+{{err}}
 			</view>
 		</view>
 		<copyRightIntro />
+		<showModal v-if="ifshowmodal" v-bind:show_modal_header="show_modal_header" v-bind:show_modal_body="show_modal_body"
+		 v-bind:show_modal_from="show_modal_from" v-bind:updata_url="updata_url" v-on:showModalsuccess="showModalsuccess()" />
 	</view>
 </template>
 
 <script>
 	import copyRightIntro from "../components/copyRightIntro/copyRightIntro.vue"
 	import choServerModal from "../components/choServerModal/choServerModal.vue"
+	import showModal from "../components/showModal/showModal.vue"
 	import {
 		mapState,
 		mapMutations
@@ -36,7 +39,8 @@
 	export default {
 		components: {
 			copyRightIntro,
-			choServerModal
+			choServerModal,
+			showModal
 		},
 
 		data() {
@@ -51,7 +55,16 @@
 				password: '123qwe',
 				deviceType: '8',
 				mac: '02-F4-8D-CB-0A-41',
-				showchoservermodal: false
+				showchoservermodal: false,
+				TenantId: '1',
+				ClientCode: 'WPDA',
+				ifshowmodal: false,
+				show_modal_header: '版本更新',
+				show_modal_body: '',
+				show_modal_from: 'mylogin',
+				updata_url: '',
+				childPermissions: '',
+				err:''
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -61,6 +74,9 @@
 			},
 			current_language() {
 				return this.$store.state.current_language
+			},
+			current_version() {
+				return this.$store.state.current_version
 			},
 			i18n() {
 				return this.$t('mylogin')
@@ -99,6 +115,9 @@
 			success() {
 				this.showchoservermodal = !this.showchoservermodal
 			},
+			showModalsuccess() {
+				this.ifshowmodal = !this.ifshowmodal
+			},
 			ClientLogin() {
 
 				let that = this
@@ -118,8 +137,7 @@
 						'Abp.Localization.CultureName': that.current_language
 					},
 					success: (res) => {
-						console.log(res.data);
-
+						console.log(res.data)
 						// 						if (res.data.result != null) {
 						// 							uni.switchTab({
 						// 								url: '../homepage/homepage'
@@ -142,8 +160,11 @@
 									duration: 2000
 								});
 							} else {
+
 								that.changeToken(res.data.result.token)
 								that.changeOrgId(res.data.result.currentOrgUnit.id)
+								that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
+								uni.setStorageSync('childPermissions', that.childPermissions);
 								uni.switchTab({
 									url: '../homepage/homepage'
 								})
@@ -159,11 +180,58 @@
 					}
 
 				});
-			}
+			},
+			GetCSVersion() {
+
+				let that = this
+				uni.request({
+					url: that.connect_url + 'api/services/app/ClientVersion/GetCSVersion', //仅为示例，并非真实接口地址。
+					data: {
+						TenantId: that.TenantId,
+						ClientCode: that.ClientCode
+
+					},
+					method: 'POST',
+					header: {
+						'Content-Type': 'application/json', //自定义请求头信息
+						'Authorization': 'Bearer ' + that.token,
+						'Abp.Localization.CultureName': that.current_language
+					},
+					success: (res) => {
+						console.log(res.data)
+						that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
+
+						if (that.current_version < res.data.result.version) {
+
+							if (res.data.result.updateMode == 1) {
+
+								that.ifshowmodal = true
+								that.show_modal_body = '可升级'
+
+							} else if (res.data.result.updateMode == 1) {
+								// that.show_modal_body = '强制性升级'
+								plus.runtime.openURL(that.updata_url);
+
+							}
+						} 
+
+
+					},
+					fail:(res) => {
+						that.err = JSON.stringify(res)
+						uni.showToast({
+							title: '我擦'+JSON.stringify(),
+							duration: 2000
+						});
+					}
+
+				});
+			},
 		},
 		onLoad() {
 			// this.MacInfo();
-
+			let that = this
+			this.GetCSVersion()
 		}
 	}
 </script>

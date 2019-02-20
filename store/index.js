@@ -13,13 +13,14 @@ const store = new Vuex.Store({
 		userName: "",
 		token:'',
 		OrgId:'',
-		connect_url: 'http://47.101.50.234:83/',
+		connect_url: 'http://192.168.0.115:8010/',
 		// current_language:'zh-CN',
 		connect_url_all: [
 			'http://182.61.31.228:8100/',
 			'http://182.61.31.228:8101/',
 			'http://182.61.31.228:8102/'
-		]
+		],
+		current_version:103
 	},
 	mutations: {
 		login(state, userName) {

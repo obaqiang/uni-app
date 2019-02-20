@@ -466,10 +466,10 @@
 	        align-items: center;
 	height: 100rpx;
 }
-.show_modal_body{
+.show_modal_body {
 	min-height: 200rpx;
 }
-.show_modal_footer{
+.show_modal_footer {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -484,7 +484,7 @@
 	width: 100%;
 	margin-bottom: 20rpx;
 }
-.show_modal_footer_btn_left{
+.show_modal_footer_btn_left {
 	background: #FF7200;
 	color: #FFFFFF;
 }

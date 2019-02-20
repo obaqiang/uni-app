@@ -3,7 +3,7 @@
 		<image class="homebanner" :src="mine_banner_bg"></image>
 
 		<view class="mes_area">
-			<view class="mes_list">
+			<view class="mes_list" @tap="gotoUserInfo">
 				<view class="mes_list_left">
 					<image class="mes_list_icon" :src="set_userinfo"></image>
 					<text>用户信息</text>

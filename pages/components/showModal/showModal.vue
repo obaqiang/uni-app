@@ -9,7 +9,7 @@
 				{{show_modal_body}}
 			</view>
 			<view class="show_modal_footer">
-				<button class="show_modal_footer_btn_left" @tap="closeModal">确定</button>
+				<button class="show_modal_footer_btn_left" @tap="showModalBtnLeft">确定</button>
 				<button class="show_modal_footer_btn_right" @tap="closeModal">取消</button>
 			</view>
 		</view>
@@ -18,7 +18,7 @@
 
 <script>
 	export default {
-		props: ['ifshowmodal','show_modal_header','show_modal_body'],
+		props: ['ifshowmodal', 'show_modal_header', 'show_modal_body', 'show_modal_from','updata_url'],
 		components: {
 
 		},
@@ -31,12 +31,25 @@
 
 
 		methods: {
-			closeModal(){
-				this.$emit('success',true);
+			showModalBtnLeft() {
+				if (this.show_modal_from == 'mylogin') {
+					uni.showToast({
+						title: "跳转到更新下载界面",
+					})
+					plus.runtime.openURL(this.updata_url);
+				}
+
+
+			},
+			closeModal() {
+				if (this.show_modal_from == 'mylogin') {
+					this.$emit('showModalsuccess', true);
+				}
+
 			}
 		},
 		onLoad() {
-
+			
 		}
 	}
 </script>
@@ -72,17 +85,20 @@
 		align-items: center;
 		height: 100upx;
 	}
-	.show_modal_body{
+
+	.show_modal_body {
 		min-height: 200upx;
 	}
-	.show_modal_footer{
+
+	.show_modal_footer {
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
 		width: 100%;
 		margin-bottom: 20upx;
 	}
-	.show_modal_footer_btn_left{
+
+	.show_modal_footer_btn_left {
 		background: #FF7200;
 		color: #FFFFFF;
 	}

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/mylogin/mylogin",
+    "pages/DeviceInfo/DeviceInfo",
+    "pages/UserInfo/UserInfo",
     "pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh",
     "pages/IncomingQualityInspection/IncomingQualityInspection",
     "pages/qualityInspection/qualityInspection",
@@ -20,7 +23,6 @@
     "pages/mine/mine",
     "pages/changePwd/changePwd",
     "pages/morecountry/morecountry",
-    "pages/mylogin/mylogin",
     "pages/main/main",
     "pages/login/login",
     "pages/reg/reg",

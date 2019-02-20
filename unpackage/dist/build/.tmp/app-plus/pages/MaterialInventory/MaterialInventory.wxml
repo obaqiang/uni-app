@@ -1,0 +1,2 @@
+<import src="./MaterialInventory.vue.wxml" />
+    <template is="4fdd992e" data="{{ ...$root['0'], $root }}"/>

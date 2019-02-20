@@ -1,5 +1,24 @@
 {
 	"pages": [{
+			"path": "pages/mylogin/mylogin",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/DeviceInfo/DeviceInfo",
+			"style": {
+				"navigationBarTitleText": "设备信息"
+			}
+		},
+		{
+			"path": "pages/UserInfo/UserInfo",
+			"style": {
+				"navigationBarTitleText": "用户信息"
+			}
+		},
+
+		{
 			"path": "pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh",
 			"style": {
 				"navigationBarTitleText": "来料质检（高检）"
@@ -142,12 +161,7 @@
 				"navigationBarTitleText": ""
 			}
 		},
-		{
-			"path": "pages/mylogin/mylogin",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
+
 		{
 			"path": "pages/main/main",
 			"style": {

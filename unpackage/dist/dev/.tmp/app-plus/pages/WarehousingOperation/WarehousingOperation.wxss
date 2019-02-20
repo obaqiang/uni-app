@@ -1,16 +1,16 @@
 
-page{
-		background: #f2f2f2;
+page {
+	background: #f2f2f2;
 }
-.stock_in_bg{
+.stock_in_bg {
 	width: 750rpx;
 	height: 350rpx;
 }
-.stock_in_sendpro_order{
+.stock_in_sendpro_order {
 	width: 100rpx;
 	height: 100rpx;
 }
-.warehousingopration_bl{
+.warehousingopration_bl {
 	background: #FFFFFF;
 	border-radius: 10rpx;
 	width: 700rpx;
@@ -21,7 +21,7 @@ page{
 	position: relative;
 	overflow: hidden;
 }
-.warehousingopration_bl_bl{
+.warehousingopration_bl_bl {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -43,7 +43,7 @@ page{
 	float: left;
 	margin-bottom: 50rpx;
 }
-.warehousingopration_bl_text{
+.warehousingopration_bl_text {
 	background: #FFB700;
 	position: absolute;
 	top: 0;
