@@ -6,6 +6,7 @@
 	color: #FFFFFF;
 	background: #FFB700;
 	text-align: center;
+	bottom: 0;
 }
 
 .common_area {
@@ -32,4 +33,11 @@
 	margin: auto;
 	border-radius: 10upx;
 	text-align: center;
+}
+.common_btn_fb{
+	background: #FFB700;
+	color: #FFFFFF;
+	width: 700upx;
+	margin: 30upx 25upx;
+	font-size: 25upx;
 }

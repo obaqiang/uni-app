@@ -1,5 +1,32 @@
 {
-	"pages": [{
+	"pages": [
+
+		{
+			"path": "pages/ProductionTaskList/ProductionTaskList",
+			"style": {
+				"navigationBarTitleText": "生产任务单列表"
+			}
+		},
+
+		{
+			"path": "pages/DeliveryOrderInquiry/DeliveryOrderInquiry",
+			"style": {
+				"navigationBarTitleText": "送货单查询"
+			}
+		},
+		{
+			"path": "pages/ItemInventory/ItemInventory",
+			"style": {
+				"navigationBarTitleText": "物品清点"
+			}
+		},
+		{
+			"path": "pages/PurchaseList/PurchaseList",
+			"style": {
+				"navigationBarTitleText": "采购单列表"
+			}
+		},
+		{
 			"path": "pages/mylogin/mylogin",
 			"style": {
 				"navigationBarTitleText": ""

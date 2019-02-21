@@ -32,11 +32,11 @@
 		data() {
 			return {
 				PurchaseOrderInquiryHead_show:true,
-				PurchaseOrderInquirybodyA_show:false,
-				PurchaseOrderInquirybodyB_show:false,
-				PurchaseOrderInquirybodyC_show:false,
-				PurchaseOrderInquirybodyD_show:false,
-				PurchaseOrderInquirybodyE_show:false
+				PurchaseOrderInquirybodyA_show:true,
+				PurchaseOrderInquirybodyB_show:true,
+				PurchaseOrderInquirybodyC_show:true,
+				PurchaseOrderInquirybodyD_show:true,
+				PurchaseOrderInquirybodyE_show:true
 			};
 		},
 		onNavigationBarButtonTap() {

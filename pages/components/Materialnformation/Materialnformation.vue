@@ -32,7 +32,7 @@
 				<text>规格型号:</text>
 				<text class="footer_text_b">WL000001</text>
 			</view>
-		
+
 		</view>
 		<view class="create_btn">生成入库单</view>
 
@@ -115,24 +115,27 @@
 		width: 450upx;
 		font-size: 20upx;
 	}
-	.footer_area{
+
+	.footer_area {
 		padding-top: 30upx;
 	}
-	.footer_list{
+
+	.footer_list {
 		display: flex;
 		margin-left: 50upx;
 	}
-	.footer_text_b{
+
+	.footer_text_b {
 		margin-left: 30upx;
 	}
-	.create_btn{
+
+	.create_btn {
 		position: fixed;
 		width: 750upx;
 		background: #FFB700;
-bottom: 0;
+		bottom: 0;
 		text-align: center;
 		color: #FFFFFF;
 		line-height: 100upx;
 	}
-	
 </style>

@@ -3,10 +3,13 @@
 		<image class="stock_in_bg" :src="stock_in_bg"></image>
 		<view class="warehousingopration_bl" v-if="text_a_list!=''">
 			<text class="warehousingopration_bl_text">{{text_a}}</text>
-			<view class="warehousingopration_bl_bl" v-for="item in text_a_list">
-				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Po'" class="stock_in_sendpro_order" :src="stock_in_sendpro_order" mode=""></image>
-				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Asn'" class="stock_in_sendpro_order" :src="stock_in_buy_order" mode=""></image>
-				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.OutSourcePo'" class="stock_in_sendpro_order" :src="stock_in_buy_order" mode=""></image>
+			<view class="warehousingopration_bl_bl" v-for="item in text_a_list" @tap="gotoPage(item.permissionCode)">
+				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Po'" class="stock_in_sendpro_order" :src="stock_in_sendpro_order"
+				 mode=""></image>
+				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Asn'" class="stock_in_sendpro_order" :src="stock_in_buy_order"
+				 mode=""></image>
+				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.OutSourcePo'" class="stock_in_sendpro_order" :src="stock_in_buy_order"
+				 mode=""></image>
 				<text>{{item.permissionName}}</text>
 			</view>
 			<!-- <view class="warehousingopration_bl_bl">
@@ -41,7 +44,7 @@
 				<text>其他入库</text>
 			</view>
 		</view>
-		<view class="warehousingopration_bl"  v-if="text_c_list!=''">
+		<view class="warehousingopration_bl" v-if="text_c_list!=''">
 			<text class="warehousingopration_bl_text">{{text_c}}</text>
 			<view class="warehousingopration_bl_bl">
 				<image class="stock_in_sendpro_order" :src="stock_in_out_return" mode=""></image>
@@ -97,7 +100,18 @@
 		computed: {},
 
 		methods: {
-
+			gotoPage(page_name) {
+				let that = this
+				console.log(page_name)
+				switch (page_name) {
+					case 'Pages.WPDA.Instock.Receipt.Po':
+						uni.navigateTo({
+							url: '../IncomingStorage/IncomingStorage'
+						});
+						break;
+					default:
+				}
+			}
 		},
 		onLoad() {
 			let that = this

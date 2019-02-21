@@ -10,16 +10,22 @@
 				<view class="login_in">
 					<image class="login_username" :src="login_username"></image>
 					<input class="login_input" type="text" v-model="account" placeholder="请输入用户名">
-					<image class="login_clear" :src="login_clear"></image>
+					<image class="login_clear" :src="login_clear" @tap="DeleteLoginName"></image>
 				</view>
 				<view class="login_in">
 					<image class="login_username" :src="login_password"></image>
-					<input class="login_input" type="text" v-model="password" placeholder="请输入密码">
-					<image class="login_clear" :src="login_password_show"></image>
+					<input class="login_input" :type="password_type" v-model="password" placeholder="请输入密码">
+					<image class="login_clear" :src="login_password_show" @tap="ChangeInputType"></image>
 				</view>
+				<view class="my_login_hook_area" @tap="RemberLogin">
+					<image class="ali_icon" :src="ali_no_hook" v-if="rember_login==false"></image>
+					<image class="ali_icon" :src="ali_hook" v-if="rember_login"></image>
+					<text>记住密码</text>
+				</view>
+
 				<button class="btn_login" @tap="bindLogin">{{ i18n.login_in_now }}</button>
 				<button class="btn_server" @tap="choServer">{{ i18n.configure_server }}</button>
-{{err}}
+				{{err}}
 			</view>
 		</view>
 		<copyRightIntro />
@@ -45,14 +51,18 @@
 
 		data() {
 			return {
+				ali_no_hook: "../../static/img/ali_no_hook.png",
+				ali_hook: "../../static/img/ali_hook.png",
 				login_head: "../../static/img/login_head.png",
 				login_username: "../../static/img/login_username.png",
 				login_clear: "../../static/img/login_clear.png",
 				login_password: "../../static/img/login_password.png",
 				login_password_show: "../../static/img/login_password_show.png",
-				account: 'Default',
+				// account: 'Default',
+				account:'',
 				usernameOrEmailAddress: 'admin',
-				password: '123qwe',
+				// password: '123qwe',
+				password:'',
 				deviceType: '8',
 				mac: '02-F4-8D-CB-0A-41',
 				showchoservermodal: false,
@@ -64,7 +74,9 @@
 				show_modal_from: 'mylogin',
 				updata_url: '',
 				childPermissions: '',
-				err:''
+				err: '',
+				rember_login: false,
+				password_type: 'password'
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -117,6 +129,32 @@
 			},
 			showModalsuccess() {
 				this.ifshowmodal = !this.ifshowmodal
+			},
+			RemberLogin() {
+				let that = this
+				that.rember_login = !that.rember_login
+				if(that.rember_login == true){
+					uni.setStorageSync('account', that.account);
+					uni.setStorageSync('password', that.password);
+				}else{
+					uni.setStorageSync('account', '');
+					uni.setStorageSync('password', '');
+				}
+			},
+			DeleteLoginName() {
+				let that = this
+				that.account = ''
+				that.password = ''
+			},
+			ChangeInputType() {
+				let that = this
+				console.log(132)
+				// that.password_type = 'password' ? 'text':'password'
+				if(that.password_type=='password'){
+					that.password_type = 'text'
+				}else{
+					that.password_type = 'password'
+				}
 			},
 			ClientLogin() {
 
@@ -213,14 +251,14 @@
 								plus.runtime.openURL(that.updata_url);
 
 							}
-						} 
+						}
 
 
 					},
-					fail:(res) => {
+					fail: (res) => {
 						that.err = JSON.stringify(res)
 						uni.showToast({
-							title: '我擦'+JSON.stringify(),
+							title: '我擦' + JSON.stringify(),
 							duration: 2000
 						});
 					}
@@ -232,6 +270,11 @@
 			// this.MacInfo();
 			let that = this
 			this.GetCSVersion()
+			that.account=uni.getStorageSync('account');
+			that.password = uni.getStorageSync('password');
+			if(that.account!=''){
+				that.rember_login = true
+			}
 		}
 	}
 </script>
@@ -286,13 +329,15 @@
 	.login_input {
 		width: 400upx;
 		margin: 50upx;
+		border: none;
+		outline: none;
 	}
 
 	.btn_login {
 		background: #ffb700;
 		color: #FFFFFF;
 		width: 600upx;
-		margin-top: 100upx;
+		/* margin-top: 100upx; */
 	}
 
 	.btn_server {
@@ -301,5 +346,22 @@
 		border: 1px solid #FFB700;
 		width: 600upx;
 		margin-top: 20upx;
+	}
+
+	.ali_icon {
+		width: 50upx;
+		height: 50upx;
+		margin-left: 50upx;
+	}
+
+	.my_login_hook_area {
+		display: flex;
+		align-items: center;
+		height: 100upx;
+	}
+
+	.my_login_hook_area text {
+		color: #FFB700;
+		margin-left: 30upx;
 	}
 </style>

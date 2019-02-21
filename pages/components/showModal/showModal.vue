@@ -87,7 +87,7 @@
 	}
 
 	.show_modal_body {
-		min-height: 200upx;
+		min-height: 100upx;
 	}
 
 	.show_modal_footer {
@@ -101,5 +101,11 @@
 	.show_modal_footer_btn_left {
 		background: #FF7200;
 		color: #FFFFFF;
+		font-size: 25upx;
+		width: 200upx;
+	}
+	.show_modal_footer_btn_right{
+		font-size: 25upx;
+		width: 200upx;
 	}
 </style>

@@ -10,7 +10,7 @@
 				</view>
 				<image class="mes_list_right_icon" :src="set_next_page"></image>
 			</view>
-			<view class="mes_list">
+			<view class="mes_list" @tap="gotoDeviceInfo">
 				<view class="mes_list_left">
 					<image class="mes_list_icon" :src="set_device"></image>
 					<text>设备信息</text>
@@ -51,14 +51,14 @@
 		</view>
 
 		<view class="mes_area">
-			<view class="mes_list">
+			<view class="mes_list" @tap="gotochooslan">
 				<view class="mes_list_left">
 					<image class="mes_list_icon" :src="set_language"></image>
 					<text>选择语言</text>
 				</view>
 				<image class="mes_list_right_icon" :src="set_next_page"></image>
 			</view>
-			<view class="mes_list">
+			<view class="mes_list" @tap="gotoSetService">
 				<view class="mes_list_left">
 					<image class="mes_list_icon" :src="set_server"></image>
 					<text>服务设置</text>
@@ -94,7 +94,8 @@
 			</view>
 		</view>
 
-
+		<showModal v-if="ifshowmodal" v-bind:show_modal_header="show_modal_header" v-bind:show_modal_body="show_modal_body"
+		 v-bind:show_modal_from="show_modal_from" v-on:showModalsuccess="showModalsuccess()" />
 	</view>
 </template>
 
@@ -103,9 +104,10 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
+	import showModal from "../components/showModal/showModal.vue"
 	export default {
 		components: {
-
+			showModal
 		},
 
 		data() {
@@ -123,7 +125,11 @@
 				set_next_page: "../../static/img/set_next_page.png",
 				TenantId: '1',
 				ClientCode: 'WPDA',
-				deviceType:8
+				deviceType: 8,
+				ifshowmodal:false,
+				show_modal_header:'服务设置',
+				show_modal_body:'重新配置服务将退出登陆',
+				show_modal_from:'mine'
 
 			};
 		},
@@ -140,7 +146,7 @@
 			token() {
 				return this.$store.state.token
 			},
-			OrgId(){
+			OrgId() {
 				return this.$store.state.OrgId
 			}
 		},
@@ -150,6 +156,29 @@
 				uni.navigateTo({
 					url: '../changePwd/changePwd'
 				});
+			},
+			gotoUserInfo() {
+				uni.navigateTo({
+					url: '../UserInfo/UserInfo'
+				});
+			},
+			gotoDeviceInfo() {
+				uni.navigateTo({
+					url: '../DeviceInfo/DeviceInfo'
+				});
+			},
+			gotochooslan() {
+				uni.navigateTo({
+					url: '../chooslan/chooslan'
+				});
+			},
+			gotoSetService() {
+				let that = this
+				that.ifshowmodal = true
+			},
+			showModalsuccess(){
+				let that = this
+				that.ifshowmodal = false
 			},
 			GetCSVersion() {
 				let that = this

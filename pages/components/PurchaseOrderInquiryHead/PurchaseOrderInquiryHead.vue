@@ -6,7 +6,7 @@
 		</view>
 		<view class="PurchaseOrderInquiryHead_head_input_area">
 			订单号
-			<input class="PurchaseOrderInquiryHead_uni-input"  placeholder="请输入订单号/订单尾号4位数以上/扫码查询" />
+			<input class="PurchaseOrderInquiryHead_uni-input"  :placeholder="c_text" />
 		</view>
 		<image class="PurchaseOrderInquiryHead_query_scan_icon" :src="query_scan"></image>
 	</view>
@@ -14,6 +14,7 @@
 
 <script>
 	export default {
+		props: ['a_text','b_text','c_text'],
 		data() {
 			return {
 				query_scan: "../../static/img/query_scan.png",
@@ -45,6 +46,9 @@
 		border-radius: 10upx;
 		margin-left: 20upx;
 		width: 550upx;
+	}
+	.PurchaseOrderInquiryHead_uni-input:hover{
+		border: 1px solid #FFB700;
 	}
 	.PurchaseOrderInquiryHead_query_scan_icon{
 		width: 100upx;

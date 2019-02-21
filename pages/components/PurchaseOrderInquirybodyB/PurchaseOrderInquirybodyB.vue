@@ -1,20 +1,20 @@
 <template>
 	<view class="mes_area">
 		<view class="mes_list">
-			<text>采购订单:</text>
-			<text>fsfdsfsfsfsfsfdsfds</text>
+			<text>{{order_text}}:</text>
+			<text>{{order_text_list}}</text>
 		</view>
 		<view class="mes_list">
-			<text>采购日期:</text>
-			<text>2017-08-09</text>
+			<text>{{order_time}}:</text>
+			<text>{{order_time_list}}</text>
 		</view>
 		<view class="mes_list">
-			<text>供应商:</text>
-			<text>深圳超燃股份有限公司</text>
+			<text>{{supplier}}:</text>
+			<text>{{supplier_list}}</text>
 		</view>
 		<view class="mes_list">
-			<text>采购员:</text>
-			<text>王坤</text>
+			<text>{{supplier_man}}:</text>
+			<text>{{supplier_man_list}}</text>
 		</view>
 		<view class="bg_line">
 			
@@ -23,6 +23,31 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
+	export default {
+		props: ['order_text','order_time','supplier','supplier_man','order_text_list','order_time_list','supplier_list','supplier_man_list',],
+		components: {
+	
+		},
+	
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+		},
+		onLoad() {
+			// this.MacInfo();
+			console.log(132)
+			console.log(this.connect_url_all)
+	
+		}
+	}
+	
 </script>
 
 <style>
