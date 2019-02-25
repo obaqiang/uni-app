@@ -24,7 +24,7 @@
 				</view>
 				<image class="mes_list_right_icon" :src="set_next_page"></image>
 			</view>
-			<view class="mes_list" @tap="ClientChangeOrgainzation">
+			<view class="mes_list" @tap="gotoOrganizationalSwitching">
 				<view class="mes_list_left">
 					<image class="mes_list_icon" :src="set_team"></image>
 					<text>组织切换</text>
@@ -170,6 +170,11 @@
 			gotochooslan() {
 				uni.navigateTo({
 					url: '../chooslan/chooslan'
+				});
+			},
+			gotoOrganizationalSwitching(){
+				uni.navigateTo({
+					url: '../OrganizationalSwitching/OrganizationalSwitching'
 				});
 			},
 			gotoSetService() {

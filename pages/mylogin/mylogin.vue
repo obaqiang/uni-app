@@ -59,10 +59,10 @@
 				login_password: "../../static/img/login_password.png",
 				login_password_show: "../../static/img/login_password_show.png",
 				// account: 'Default',
-				account:'',
+				account: '',
 				usernameOrEmailAddress: 'admin',
 				// password: '123qwe',
-				password:'',
+				password: '',
 				deviceType: '8',
 				mac: '02-F4-8D-CB-0A-41',
 				showchoservermodal: false,
@@ -90,15 +90,20 @@
 			current_version() {
 				return this.$store.state.current_version
 			},
+			post_header() {
+				return this.$store.state.post_header
+			},
 			i18n() {
 				return this.$t('mylogin')
-			}
+			},
 		},
 
 		methods: {
 			...mapMutations(['MacInfo']),
 			...mapMutations(['changeToken']),
 			...mapMutations(['changeOrgId']),
+			...mapMutations(['changePostHeader']),
+			...mapMutations(['MyLoginSucRes']),
 			bindLogin() {
 				/**
 				 * 客户端对账号信息进行一些必要的校验。
@@ -133,10 +138,10 @@
 			RemberLogin() {
 				let that = this
 				that.rember_login = !that.rember_login
-				if(that.rember_login == true){
+				if (that.rember_login == true) {
 					uni.setStorageSync('account', that.account);
 					uni.setStorageSync('password', that.password);
-				}else{
+				} else {
 					uni.setStorageSync('account', '');
 					uni.setStorageSync('password', '');
 				}
@@ -150,9 +155,9 @@
 				let that = this
 				console.log(132)
 				// that.password_type = 'password' ? 'text':'password'
-				if(that.password_type=='password'){
+				if (that.password_type == 'password') {
 					that.password_type = 'text'
-				}else{
+				} else {
 					that.password_type = 'password'
 				}
 			},
@@ -175,46 +180,43 @@
 						'Abp.Localization.CultureName': that.current_language
 					},
 					success: (res) => {
-						console.log(res.data)
-						// 						if (res.data.result != null) {
-						// 							uni.switchTab({
-						// 								url: '../homepage/homepage'
-						// 							})
-						// 						} else {
-						// 							uni.showToast({
-						// 								title: res.data.error.details,
-						// 								duration: 2000
-						// 							});
-						// 						}
-						if (res.data.success == true) {
-							if (res.data.result.currentOrgUnit == null) {
-								uni.showToast({
-									title: '当前用户不属于任何组织，无法登录',
-									duration: 2000
-								});
-							} else if (res.data.result.grantPermission == null) {
-								uni.showToast({
-									title: '用户未授权',
-									duration: 2000
-								});
-							} else {
-
-								that.changeToken(res.data.result.token)
-								that.changeOrgId(res.data.result.currentOrgUnit.id)
-								that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
-								uni.setStorageSync('childPermissions', that.childPermissions);
-								uni.switchTab({
-									url: '../homepage/homepage'
-								})
-							}
-
-						} else {
-							uni.showToast({
-								title: res.data.error.message,
-								duration: 2000
-							});
-						}
-
+						that.MyLoginSucRes(res)
+// 						if (res.data.success == true) {
+// 							if (res.data.result.currentOrgUnit == null) {
+// 								uni.showToast({
+// 									title: '当前用户不属于任何组织，无法登录',
+// 									duration: 2000
+// 								});
+// 							} else if (res.data.result.grantPermission == null) {
+// 								uni.showToast({
+// 									title: '用户未授权',
+// 									duration: 2000
+// 								});
+// 							} else {
+// 
+// 								that.changeToken(res.data.result.token)
+// 								let post_header = {
+// 									'Content-Type': 'application/json', //自定义请求头信息
+// 									'Authorization': 'Bearer ' + res.data.result.token,
+// 									'Abp.Localization.CultureName': that.current_language
+// 								}
+// 								that.changePostHeader(post_header)
+// 								that.changeOrgId(res.data.result.currentOrgUnit.id)
+// 								that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
+// 								uni.setStorageSync('childPermissions', that.childPermissions);
+// 								uni.setStorageSync('currentOrgUnit', res.data.result.currentOrgUnit);
+// 								uni.setStorageSync('orgUnits', res.data.result.orgUnits);
+// 								uni.switchTab({
+// 									url: '../homepage/homepage'
+// 								})
+// 							}
+// 
+// 						} else {
+// 							uni.showToast({
+// 								title: res.data.error.message,
+// 								duration: 2000
+// 							});
+// 						}
 					}
 
 				});
@@ -236,7 +238,7 @@
 						'Abp.Localization.CultureName': that.current_language
 					},
 					success: (res) => {
-						console.log(res.data)
+						// console.log(res.data)
 						that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
 
 						if (that.current_version < res.data.result.version) {
@@ -270,9 +272,9 @@
 			// this.MacInfo();
 			let that = this
 			this.GetCSVersion()
-			that.account=uni.getStorageSync('account');
+			that.account = uni.getStorageSync('account');
 			that.password = uni.getStorageSync('password');
-			if(that.account!=''){
+			if (that.account != '') {
 				that.rember_login = true
 			}
 		}

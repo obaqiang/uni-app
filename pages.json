@@ -1,5 +1,32 @@
 {
-	"pages": [
+	"pages": [{
+			"path": "pages/mylogin/mylogin",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/OrganizationalSwitching/OrganizationalSwitching",
+			"style": {
+				"navigationBarTitleText": "组织切换"
+			}
+		},
+		{
+			"path": "pages/changePwd/changePwd",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+				// 				"titleNView": {
+				// 					"buttons": [ //原生标题栏按钮配置,
+				// 						{
+				// 							"text": "完成",
+				// 							// "fontSrc": "/static/iconfont.ttf",
+				// 							"fontSize": "15px",
+				// 							"float": "right"
+				// 						}
+				// 					]
+				// 				}
+			}
+		},
 
 		{
 			"path": "pages/ProductionTaskList/ProductionTaskList",
@@ -26,12 +53,7 @@
 				"navigationBarTitleText": "采购单列表"
 			}
 		},
-		{
-			"path": "pages/mylogin/mylogin",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
+
 		{
 			"path": "pages/DeviceInfo/DeviceInfo",
 			"style": {
@@ -165,22 +187,7 @@
 
 			}
 		},
-		{
-			"path": "pages/changePwd/changePwd",
-			"style": {
-				"navigationBarTitleText": "修改密码",
-				"titleNView": {
-					"buttons": [ //原生标题栏按钮配置,
-						{
-							"text": "完成",
-							// "fontSrc": "/static/iconfont.ttf",
-							"fontSize": "15px",
-							"float": "right"
-						}
-					]
-				}
-			}
-		},
+
 
 		{
 			"path": "pages/morecountry/morecountry",
