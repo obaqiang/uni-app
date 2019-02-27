@@ -93,7 +93,7 @@
 
 						},
 						method: 'POST',
-						header: post_header,
+						header: that.post_header,
 						success: (res) => {
 							console.log(res.data);
 							if (res.data.success == true) {

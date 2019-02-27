@@ -2,7 +2,7 @@
 	<view class="body_list">
 		<text class="text_a">{{scan_input_text}}:</text>
 		<view class="text_right_area">
-			<input class="text_right_input" type="text" :placeholder="placeholder_text">
+			<input class="text_right_input" type="text" :placeholder="placeholder_text"  @input="onKeyInput">
 			<image class="text_right_area_icon" :src="text_right_area_icon"></image>
 		</view>
 	</view>
@@ -26,10 +26,19 @@
 		computed: {},
 
 		methods: {
-
+			onKeyInput: function(e) {
+				// console.log(e.detail.value)
+				// this.inputValue = event.target.value
+				let that = this
+				if(that.scan_input_text=='单号'){
+					that.$emit('scanAInputSuc', e.detail.value);
+				}else if(that.scan_input_text=='供应商'){
+					that.$emit('scanBInputSuc', e.detail.value);
+				}
+				
+			},
 		},
 		onLoad() {
-			console.log(this.placeholder_text)
 		}
 	}
 </script>
@@ -60,7 +69,8 @@
 		margin-left: 10upx;
 		border-radius: 10upx;
 	}
-	.text_right_area:hover{
+
+	.text_right_area:hover {
 		border: 1px solid #ffb700;
 	}
 

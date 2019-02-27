@@ -6,6 +6,17 @@
 			}
 		},
 		{
+			"path": "pages/blueToothPrint/blueToothPrint",
+			"style": {
+				"navigationBarTitleText": "蓝牙打印"
+			}
+		}, {
+			"path": "pages/chooslan/chooslan",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/OrganizationalSwitching/OrganizationalSwitching",
 			"style": {
 				"navigationBarTitleText": "组织切换"
@@ -158,12 +169,7 @@
 				"navigationBarTitleText": "采购单查询"
 			}
 		},
-		{
-			"path": "pages/chooslan/chooslan",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
+
 		{
 			"path": "pages/homepage/homepage",
 			"style": {

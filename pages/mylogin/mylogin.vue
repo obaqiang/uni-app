@@ -177,10 +177,10 @@
 					method: 'POST',
 					header: {
 						'Content-Type': 'application/json', //自定义请求头信息
-						'Abp.Localization.CultureName': that.current_language
+						'Abp.Localization.CultureName': that.$i18n.locale
 					},
 					success: (res) => {
-						that.MyLoginSucRes(res)
+						that.MyLoginSucRes(res,that)
 // 						if (res.data.success == true) {
 // 							if (res.data.result.currentOrgUnit == null) {
 // 								uni.showToast({
@@ -222,7 +222,6 @@
 				});
 			},
 			GetCSVersion() {
-
 				let that = this
 				uni.request({
 					url: that.connect_url + 'api/services/app/ClientVersion/GetCSVersion', //仅为示例，并非真实接口地址。
@@ -235,25 +234,31 @@
 					header: {
 						'Content-Type': 'application/json', //自定义请求头信息
 						'Authorization': 'Bearer ' + that.token,
-						'Abp.Localization.CultureName': that.current_language
+						'Abp.Localization.CultureName': that.$i18n.locale
 					},
 					success: (res) => {
-						// console.log(res.data)
-						that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
-
-						if (that.current_version < res.data.result.version) {
-
-							if (res.data.result.updateMode == 1) {
-
-								that.ifshowmodal = true
-								that.show_modal_body = '可升级'
-
-							} else if (res.data.result.updateMode == 1) {
-								// that.show_modal_body = '强制性升级'
-								plus.runtime.openURL(that.updata_url);
-
+						console.log(res.data)
+						if(res.data.result!=null){
+							that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
+							if (that.current_version < res.data.result.version) {
+							
+								if (res.data.result.updateMode == 1) {
+							
+									that.ifshowmodal = true
+									that.show_modal_body = '可升级'
+							
+								} else if (res.data.result.updateMode == 1) {
+									// that.show_modal_body = '强制性升级'
+									plus.runtime.openURL(that.updata_url);
+							
+								}
 							}
+						}else{
+							uni.showModal({
+								title:'缺失apk文件'
+							})
 						}
+						
 
 
 					},
@@ -277,6 +282,7 @@
 			if (that.account != '') {
 				that.rember_login = true
 			}
+			console.log(this.$i18n.locale )
 		}
 	}
 </script>

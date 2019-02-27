@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
 const store = new Vuex.Store({
 	state: {
 		/**
@@ -59,8 +58,7 @@ const store = new Vuex.Store({
 		changePostHeader(state, post_header) {
 			state.post_header = post_header
 		},
-		MyLoginSucRes(state, res) {
-			let that = this
+		MyLoginSucRes(state, res,that) {
 			if (res.data.success == true) {
 				if (res.data.result.currentOrgUnit == null) {
 					uni.showToast({
@@ -77,14 +75,14 @@ const store = new Vuex.Store({
 					let post_header = {
 						'Content-Type': 'application/json', //自定义请求头信息
 						'Authorization': 'Bearer ' + res.data.result.token,
-						'Abp.Localization.CultureName': that.current_language
+						'Abp.Localization.CultureName': Vue.prototype.$i18n.locale
 					}
 					state.post_header = post_header
 					// that.changePostHeader(post_header)
 					// that.changeOrgId(res.data.result.currentOrgUnit.id)
 					state.changeOrgId = res.data.result.currentOrgUnit.id
-					that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
-					uni.setStorageSync('childPermissions', that.childPermissions);
+					// that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
+					uni.setStorageSync('childPermissions', res.data.result.grantPermission.childPermissions[0].childPermissions);
 					uni.setStorageSync('currentOrgUnit', res.data.result.currentOrgUnit);
 					uni.setStorageSync('orgUnits', res.data.result.orgUnits);
 					uni.switchTab({

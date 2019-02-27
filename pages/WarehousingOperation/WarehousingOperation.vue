@@ -106,7 +106,7 @@
 				switch (page_name) {
 					case 'Pages.WPDA.Instock.Receipt.Po':
 						uni.navigateTo({
-							url: '../IncomingStorage/IncomingStorage'
+							url: '../PurchaseList/PurchaseList'
 						});
 						break;
 					default:

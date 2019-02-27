@@ -1,12 +1,3 @@
 {
-  "navigationBarTitleText": "修改密码",
-  "titleNView": {
-    "buttons": [
-      {
-        "text": "完成",
-        "fontSize": "15px",
-        "float": "right"
-      }
-    ]
-  }
+  "navigationBarTitleText": "修改密码"
 }

@@ -9,59 +9,70 @@
 				{{show_modal_body}}
 				<view class="show_modal_body_list">
 					<text>物料编码:</text>
-					<text>342432432342</text>
+					<text>{{data_a}}</text>
 				</view>
 				<view class="show_modal_body_list">
-					<text>物料编码:</text>
-					<text>342432432432432432342</text>
+					<text>物料名称:</text>
+					<text>{{data_b}}</text>
 				</view>
-				<view class="show_modal_body_list">
-					<text>采购数:</text>
-					<text>342432432432432432342</text>
-				</view>
-				<view class="show_modal_body_list">
-					<text>采购数:</text>
-					<input class="show_modal_body_list_input" type="text" placeholder="请输入清点数">
-				</view>
+				<!-- <view class="show_modal_body_list">
+					<text>规格型号:</text>
+					<text>{{data_c}}</text>
+				</view> -->
 				<view class="show_modal_body_list">
 					<text>采购数:</text>
-					<input class="show_modal_body_list_input" type="text" placeholder="请输入清点数">
+					<text>{{data_d}}</text>
 				</view>
-				
+				<view class="show_modal_body_list">
+					<text>到货数:</text>
+					<text>{{data_e}}</text>
+				</view>
+				<view class="show_modal_body_list">
+					<text>清点数:</text>
+					<input class="show_modal_body_list_input" type="text" placeholder="请输入清点数" v-model="new_data_f">
+				</view>
+				<view class="show_modal_body_list">
+					<text>备品数:</text>
+					<input class="show_modal_body_list_input" type="text" placeholder="请输入备品数" v-model="new_data_g">
+				</view>
+
 			</view>
 			<input type="text">
 			<view class="show_modal_footer">
-				<button class="show_modal_footer_btn_left" @tap="showModalBtnLeft">取消</button>
-				<button class="show_modal_footer_btn_right" @tap="closeModal">保存</button>
+				<button class="show_modal_footer_btn_left" @tap="showModalBtn(false)">取消</button>
+				<button class="show_modal_footer_btn_right" @tap="showModalBtn(true)">保存</button>
 			</view>
 		</view>
-		<view class="common_bot_btn">确认提交</view>
+		<!-- <view class="common_bot_btn">确认提交</view> -->
 	</view>
 </template>
 
 <script>
 	export default {
-		props: ['ifshowmodal', 'show_modal_header', 'show_modal_body', 'show_modal_from', 'updata_url'],
+		props: ['show_modal_header', 'show_modal_body', 'show_modal_from', 'updata_url', 'data_a', 'data_b', 'data_c',
+			'data_d', 'data_e', 'data_f', 'data_g'
+		],
 		components: {
 
 		},
 
 		data() {
 			return {
-
+				// 声明新的变量是为了防止报错
+				new_data_f: this.data_f,
+				new_data_g: this.data_g
 			};
 		},
 
 
 		methods: {
-			showModalBtnLeft() {
-
-
+			showModalBtn(e) {
+				// 将清点数和备品的input数据保存起来
+				uni.setStorageSync('data_f', this.new_data_f)
+				uni.setStorageSync('data_g', this.new_data_g)
+				this.$emit('showModalBtn', e);
 			},
-			closeModal() {
 
-
-			}
 		},
 		onLoad() {
 
@@ -151,5 +162,4 @@
 	.show_modal_body_list_input:hover {
 		border: 1px solid #FFB700 !important;
 	}
-
 </style>

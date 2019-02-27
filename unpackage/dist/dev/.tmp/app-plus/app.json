@@ -1,6 +1,14 @@
 {
   "pages": [
+    "pages/blueToothPrint/blueToothPrint",
+    "pages/chooslan/chooslan",
     "pages/mylogin/mylogin",
+    "pages/OrganizationalSwitching/OrganizationalSwitching",
+    "pages/changePwd/changePwd",
+    "pages/ProductionTaskList/ProductionTaskList",
+    "pages/DeliveryOrderInquiry/DeliveryOrderInquiry",
+    "pages/ItemInventory/ItemInventory",
+    "pages/PurchaseList/PurchaseList",
     "pages/DeviceInfo/DeviceInfo",
     "pages/UserInfo/UserInfo",
     "pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh",
@@ -18,10 +26,8 @@
     "pages/IncomingStorage/IncomingStorage",
     "pages/DeliveryInventory/DeliveryInventory",
     "pages/PurchaseOrderInquiry/PurchaseOrderInquiry",
-    "pages/chooslan/chooslan",
     "pages/homepage/homepage",
     "pages/mine/mine",
-    "pages/changePwd/changePwd",
     "pages/morecountry/morecountry",
     "pages/main/main",
     "pages/login/login",
@@ -56,7 +62,8 @@
     ]
   },
   "splashscreen": {
-    "autoclose": true
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
   },
   "appname": "uniapp-login"
 }

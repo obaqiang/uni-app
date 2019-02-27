@@ -42,8 +42,6 @@
 		},
 		onLoad() {
 			// this.MacInfo();
-			console.log(132)
-			console.log(this.connect_url_all)
 	
 		}
 	}
@@ -57,7 +55,7 @@
 	.mes_list{
 		display: flex;
 		width: 750upx;
-		line-height: 60upx;
+		line-height: 40upx;
 	}
 	.mes_list text:nth-child(1){
 		width: 200upx;

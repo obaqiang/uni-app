@@ -1,13 +1,13 @@
 <template>
 	<view>
 		<view class="PurchaseOrderInquirybodyA_head_area">
-			<view class="PurchaseOrderInquirybodyA_head_list">
+			<view class="PurchaseOrderInquirybodyA_head_list" @tap="changeAct(true)">
 				<text v-bind:class="{ 'PurchaseOrderInquirybodyA_head_list_on': active }">
 					物品清点
 				</text>
 
 			</view>
-			<view class="PurchaseOrderInquirybodyA_head_list">
+			<view class="PurchaseOrderInquirybodyA_head_list" @tap="changeAct(false)">
 				<text v-bind:class="{ 'PurchaseOrderInquirybodyA_head_list_on': active==false }">
 					清点记录
 				</text>
@@ -23,9 +23,17 @@
 		data() {
 			return {
 				query_scan: "../../static/img/query_scan.png",
-				active: false,
+				active: true,
 				isActive: 'PurchaseOrderInquirybodyA_head_list_on'
 			};
+		},
+		methods: {
+			changeAct(e){
+				this.active = e
+				this.$emit('phead_choose', e);
+			}
+		
+		
 		},
 	}
 </script>

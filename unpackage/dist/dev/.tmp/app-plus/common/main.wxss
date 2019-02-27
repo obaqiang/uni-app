@@ -1606,6 +1606,7 @@ radio-group ._label, checkbox-group ._label{
 	color: #FFFFFF;
 	background: #FFB700;
 	text-align: center;
+	bottom: 0;
 }
 .common_area {
 	background: #FFFFFF;
@@ -1629,6 +1630,13 @@ radio-group ._label, checkbox-group ._label{
 	margin: auto;
 	border-radius: 10rpx;
 	text-align: center;
+}
+.common_btn_fb{
+	background: #FFB700;
+	color: #FFFFFF;
+	width: 700rpx;
+	margin: 30rpx 25rpx;
+	font-size: 25rpx;
 }
 	/* uni-app默认全局使用flex布局。因为flex布局有利于跨更多平台，尤其是采用原生渲染的平台。如不了解flex布局，请参考http://www.w3.org/TR/css3-flexbox/。如不使用flex布局，请删除或注释掉本行。*/
 page {
