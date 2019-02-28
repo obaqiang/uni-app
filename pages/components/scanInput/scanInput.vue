@@ -2,8 +2,8 @@
 	<view class="body_list">
 		<text class="text_a">{{scan_input_text}}:</text>
 		<view class="text_right_area">
-			<input class="text_right_input" type="text" :placeholder="placeholder_text"  @input="onKeyInput">
-			<image class="text_right_area_icon" :src="text_right_area_icon"></image>
+			<input class="text_right_input" type="text" :placeholder="placeholder_text" @input="onKeyInput" v-model="scan_input_value" />
+			<image class="text_right_area_icon" :src="text_right_area_icon" @tap="scanData" v-if="scan_icon_show"></image>
 		</view>
 	</view>
 </template>
@@ -11,13 +11,15 @@
 <script>
 	import {} from 'vuex'
 	export default {
-		props: ['placeholder_text', 'scan_input_text'],
+		props: ['placeholder_text', 'scan_input_text','scan_icon_show'],
 		components: {
 
 		},
 		data() {
 			return {
 				text_right_area_icon: "../../static/img/text_right_area_icon.png",
+				scan_input_value:''
+				
 			};
 		},
 		onNavigationBarButtonTap() {
@@ -30,16 +32,26 @@
 				// console.log(e.detail.value)
 				// this.inputValue = event.target.value
 				let that = this
-				if(that.scan_input_text=='单号'){
+				if (that.scan_input_text == '单号') {
 					that.$emit('scanAInputSuc', e.detail.value);
-				}else if(that.scan_input_text=='供应商'){
+				} else if (that.scan_input_text == '供应商') {
+					that.scan_icon_show = false
 					that.$emit('scanBInputSuc', e.detail.value);
 				}
-				
+
 			},
+			scanData() {
+				let that = this
+				uni.scanCode({
+					success: function(res) {
+						console.log('条码类型：' + res.scanType);
+						console.log('条码内容：' + res.result);
+						that.scan_input_value = res.result
+					}
+				});
+			}
 		},
-		onLoad() {
-		}
+		onLoad() {}
 	}
 </script>
 
@@ -68,6 +80,7 @@
 		padding: 10upx;
 		margin-left: 10upx;
 		border-radius: 10upx;
+		width: 500upx;
 	}
 
 	.text_right_area:hover {

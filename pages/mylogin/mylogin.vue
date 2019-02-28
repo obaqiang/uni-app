@@ -14,7 +14,8 @@
 				</view>
 				<view class="login_in">
 					<image class="login_username" :src="login_password"></image>
-					<input class="login_input" :type="password_type" v-model="password" placeholder="请输入密码">
+					<input class="login_input" v-if="password_type=='password'" type="password" v-model="password" placeholder="请输入密码">
+					<input class="login_input" v-if="password_type!='password'" type="number" v-model="password" placeholder="请输入密码">
 					<image class="login_clear" :src="login_password_show" @tap="ChangeInputType"></image>
 				</view>
 				<view class="my_login_hook_area" @tap="RemberLogin">
@@ -28,6 +29,7 @@
 				{{err}}
 			</view>
 		</view>
+		<!-- <button @tap="initPosition">我得天</button> -->
 		<copyRightIntro />
 		<showModal v-if="ifshowmodal" v-bind:show_modal_header="show_modal_header" v-bind:show_modal_body="show_modal_body"
 		 v-bind:show_modal_from="show_modal_from" v-bind:updata_url="updata_url" v-on:showModalsuccess="showModalsuccess()" />
@@ -76,7 +78,8 @@
 				childPermissions: '',
 				err: '',
 				rember_login: false,
-				password_type: 'password'
+				password_type: 'password',
+				// positionTop: 0
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -104,11 +107,13 @@
 			...mapMutations(['changeOrgId']),
 			...mapMutations(['changePostHeader']),
 			...mapMutations(['MyLoginSucRes']),
+			...mapMutations(['initPosition']),
 			bindLogin() {
 				/**
 				 * 客户端对账号信息进行一些必要的校验。
 				 * 实际开发中，根据业务需要进行处理，这里仅做示例。
 				 */
+				this.initPosition()
 				if (this.account.length < 5) {
 					uni.showToast({
 						icon: 'none',
@@ -180,43 +185,43 @@
 						'Abp.Localization.CultureName': that.$i18n.locale
 					},
 					success: (res) => {
-						that.MyLoginSucRes(res,that)
-// 						if (res.data.success == true) {
-// 							if (res.data.result.currentOrgUnit == null) {
-// 								uni.showToast({
-// 									title: '当前用户不属于任何组织，无法登录',
-// 									duration: 2000
-// 								});
-// 							} else if (res.data.result.grantPermission == null) {
-// 								uni.showToast({
-// 									title: '用户未授权',
-// 									duration: 2000
-// 								});
-// 							} else {
-// 
-// 								that.changeToken(res.data.result.token)
-// 								let post_header = {
-// 									'Content-Type': 'application/json', //自定义请求头信息
-// 									'Authorization': 'Bearer ' + res.data.result.token,
-// 									'Abp.Localization.CultureName': that.current_language
-// 								}
-// 								that.changePostHeader(post_header)
-// 								that.changeOrgId(res.data.result.currentOrgUnit.id)
-// 								that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
-// 								uni.setStorageSync('childPermissions', that.childPermissions);
-// 								uni.setStorageSync('currentOrgUnit', res.data.result.currentOrgUnit);
-// 								uni.setStorageSync('orgUnits', res.data.result.orgUnits);
-// 								uni.switchTab({
-// 									url: '../homepage/homepage'
-// 								})
-// 							}
-// 
-// 						} else {
-// 							uni.showToast({
-// 								title: res.data.error.message,
-// 								duration: 2000
-// 							});
-// 						}
+						that.MyLoginSucRes(res, that)
+						// 						if (res.data.success == true) {
+						// 							if (res.data.result.currentOrgUnit == null) {
+						// 								uni.showToast({
+						// 									title: '当前用户不属于任何组织，无法登录',
+						// 									duration: 2000
+						// 								});
+						// 							} else if (res.data.result.grantPermission == null) {
+						// 								uni.showToast({
+						// 									title: '用户未授权',
+						// 									duration: 2000
+						// 								});
+						// 							} else {
+						// 
+						// 								that.changeToken(res.data.result.token)
+						// 								let post_header = {
+						// 									'Content-Type': 'application/json', //自定义请求头信息
+						// 									'Authorization': 'Bearer ' + res.data.result.token,
+						// 									'Abp.Localization.CultureName': that.current_language
+						// 								}
+						// 								that.changePostHeader(post_header)
+						// 								that.changeOrgId(res.data.result.currentOrgUnit.id)
+						// 								that.childPermissions = res.data.result.grantPermission.childPermissions[0].childPermissions
+						// 								uni.setStorageSync('childPermissions', that.childPermissions);
+						// 								uni.setStorageSync('currentOrgUnit', res.data.result.currentOrgUnit);
+						// 								uni.setStorageSync('orgUnits', res.data.result.orgUnits);
+						// 								uni.switchTab({
+						// 									url: '../homepage/homepage'
+						// 								})
+						// 							}
+						// 
+						// 						} else {
+						// 							uni.showToast({
+						// 								title: res.data.error.message,
+						// 								duration: 2000
+						// 							});
+						// 						}
 					}
 
 				});
@@ -238,27 +243,27 @@
 					},
 					success: (res) => {
 						console.log(res.data)
-						if(res.data.result!=null){
+						if (res.data.result != null) {
 							that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
 							if (that.current_version < res.data.result.version) {
-							
+
 								if (res.data.result.updateMode == 1) {
-							
+
 									that.ifshowmodal = true
 									that.show_modal_body = '可升级'
-							
+
 								} else if (res.data.result.updateMode == 1) {
 									// that.show_modal_body = '强制性升级'
 									plus.runtime.openURL(that.updata_url);
-							
+
 								}
 							}
-						}else{
+						} else {
 							uni.showModal({
-								title:'缺失apk文件'
+								title: '缺失apk文件'
 							})
 						}
-						
+
 
 
 					},
@@ -276,13 +281,14 @@
 		onLoad() {
 			// this.MacInfo();
 			let that = this
+			// that.initPosition()
 			this.GetCSVersion()
 			that.account = uni.getStorageSync('account');
 			that.password = uni.getStorageSync('password');
 			if (that.account != '') {
 				that.rember_login = true
 			}
-			console.log(this.$i18n.locale )
+			console.log(this.$i18n.locale)
 		}
 	}
 </script>

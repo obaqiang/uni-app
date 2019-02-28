@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/mylogin/mylogin",
+    "pages/login/login",
     "pages/blueToothPrint/blueToothPrint",
     "pages/chooslan/chooslan",
-    "pages/mylogin/mylogin",
     "pages/OrganizationalSwitching/OrganizationalSwitching",
     "pages/changePwd/changePwd",
     "pages/ProductionTaskList/ProductionTaskList",
@@ -30,7 +31,6 @@
     "pages/mine/mine",
     "pages/morecountry/morecountry",
     "pages/main/main",
-    "pages/login/login",
     "pages/reg/reg",
     "pages/pwd/pwd",
     "pages/user/user"
@@ -49,13 +49,13 @@
     "list": [
       {
         "pagePath": "pages/homepage/homepage",
-        "text": "",
+        "text": "智能仓储",
         "iconPath": "static/img/home_unselected.png",
         "selectedIconPath": "static/img/home_selected.png"
       },
       {
         "pagePath": "pages/mine/mine",
-        "text": "",
+        "text": "个人中心",
         "iconPath": "static/img/home_set_unselected.png",
         "selectedIconPath": "static/img/home_set_selected.png"
       }

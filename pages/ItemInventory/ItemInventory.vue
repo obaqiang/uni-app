@@ -6,11 +6,17 @@
 		 v-bind:supplier_man="supplier_man" v-bind:supplier_man_list="supplier_man_list" v-if="left_show" />
 		<PurchaseOrderInquirybodyC v-bind:table_list="table_list" v-if="left_show" v-on:tapMater="tapMater" />
 		<MaterialInventoryModal v-bind:data_a="data_a" v-bind:data_b="data_b" v-bind:data_c="data_c" v-bind:data_d="data_d"
-		 v-bind:data_e="data_e" v-bind:data_f="data_f" v-bind:data_g="data_g" v-on:showModalBtn="showModalBtn"
-		 v-bind:show_modal_header="show_modal_header" v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from"
+		 v-bind:data_e="data_e" v-bind:data_f="data_f" v-bind:data_g="data_g" v-bind:show_modal_header="show_modal_header"
+		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtn="showModalBtn"
 		 v-if="MaterialInventoryModal_show" />
 		<alertModal v-bind:alert_modal="alert_modal" v-if="alertModal_show" />
-		<view class="common_bot_btn" @tap="SureSubmit">确认提交</view>
+		<view class="common_bot_btn" @tap="SureSubmit" v-if="left_show">确认提交</view>
+		<InventoryList v-bind:InventoryList_data="InventoryList_data" v-on:modal_copyshow="modal_copyshow" v-if="left_show==false" />
+		<RecordModal v-bind:InventoryList_data_detail="InventoryList_data_detail" v-bind:data_a="InventoryList_data_detail.materialCode"
+		 v-bind:data_b="InventoryList_data_detail.materialName" v-bind:data_f="InventoryList_data_detail.countQty"
+		 v-bind:data_g="InventoryList_data_detail.giveQty" v-bind:show_modal_header="show_modal_header"
+		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtnA="showModalBtnA"
+		 v-if="record_modal_show" />
 	</view>
 </template>
 
@@ -20,6 +26,8 @@
 	import PurchaseOrderInquirybodyC from "../components/PurchaseOrderInquirybodyC/PurchaseOrderInquirybodyC.vue"
 	import MaterialInventoryModal from "../components/MaterialInventoryModal/MaterialInventoryModal.vue"
 	import alertModal from "../components/alertModal/alertModal.vue"
+	import InventoryList from "../components/InventoryList/InventoryList.vue"
+	import RecordModal from "../components/RecordModal/RecordModal.vue"
 	import {
 		mapState,
 		mapMutations
@@ -31,7 +39,9 @@
 			PurchaseOrderInquirybodyB,
 			PurchaseOrderInquirybodyC,
 			MaterialInventoryModal,
-			alertModal
+			alertModal,
+			InventoryList,
+			RecordModal
 		},
 
 		data() {
@@ -68,7 +78,16 @@
 				BillId: '',
 				DetailId: '',
 				CountQty: '',
-				GiveQty: ''
+				GiveQty: '',
+				InventoryList_data: '',
+				InventoryList_data_detail: '',
+				record_modal_show: false,
+				// 清点记录中的清点数
+				record_data_f:'',
+				// 清点记录中的备品数
+				record_data_g:'',
+				ReceiveRecordId:'',
+				positionTop:''
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -84,9 +103,40 @@
 			},
 		},
 		methods: {
+			...mapMutations(['initPosition']),
+			showModalBtnA(e) {
+				let that = this
+				that.record_modal_show = false
+				that.record_data_f = uni.getStorageSync('record_data_f')
+				that.record_data_g = uni.getStorageSync('record_data_g')
+				that.ReceiveRecordId = uni.getStorageSync('ReceiveRecordId')
+				if (e == 1) {
+					console.log(1)
+					that.DeleteReceiveRecord()
+				} else if (e == 2) {
+					console.log(2)
+				} else if (e == 3) {
+					console.log(3)
+					that.ModifyReceiveRecord()
+				}
+			},
+			
+			// 头部物料清点和清点记录按钮
 			phead_choose(e) {
 				console.log(e)
 				this.left_show = e
+				if (e == true) { //物料清点
+					this.GetPODetail()
+				} else { //清点记录
+					this.GetReceiveRecord()
+				}
+			},
+			modal_copyshow(e) {
+				let that = this
+				that.initPosition()
+				that.record_modal_show = true
+				that.InventoryList_data_detail = uni.getStorageSync('InventoryList_data_detail')
+				console.log(that.InventoryList_data_detail)
 			},
 			tapMater(e) {
 				let that = this
@@ -112,13 +162,14 @@
 			},
 			showModalBtn(e) {
 				let that = this
+				that.initPosition()
 				console.log(e)
 				that.MaterialInventoryModal_show = false
 				if (e == true) {
 					that.CountQty = uni.getStorageSync('data_f')
 					that.GiveQty = uni.getStorageSync('data_g')
-					console.log('计算后的清点数:' + that.CountQty)
-					console.log('计算后的备品数:' + that.GiveQty)
+					// 					console.log('计算后的清点数:' + that.CountQty)
+					// 					console.log('计算后的备品数:' + that.GiveQty)
 					that.SaveReceive()
 				}
 			},
@@ -158,6 +209,78 @@
 
 				});
 			},
+			DeleteReceiveRecord() {
+				let that = this
+				uni.request({
+					url: that.connect_url + 'api/services/wmspda/po/DeleteReceiveRecord', 
+					data: {
+						MAC: that.MAC,
+						ReceiveRecordId:that.ReceiveRecordId,
+						CountQty:that.record_data_f,
+						GiveQty:that.record_data_g
+
+					},
+					method: 'POST',
+					header: that.post_header,
+					success: (res) => {
+						console.log(res.data)
+						if (res.data.success == true) {
+							that.alert_modal = '记录删除成功'
+							that.alertModal_show = true
+							setTimeout(function() {
+								that.alertModal_show = false
+								that.GetReceiveRecord()
+								
+							}, 2000);
+							
+							
+						} else {
+							uni.showToast({
+								title: res.data.error.message,
+								duration: 2000
+							});
+						}
+
+					}
+
+				});
+			},
+			ModifyReceiveRecord(){
+				let that = this
+				uni.request({
+					url: that.connect_url + 'api/services/wmspda/po/ModifyReceiveRecord', 
+					data: {
+						MAC: that.MAC,
+						ReceiveRecordId:that.ReceiveRecordId,
+						CountQty:that.record_data_f,
+						GiveQty:that.record_data_g
+				
+					},
+					method: 'POST',
+					header: that.post_header,
+					success: (res) => {
+						console.log(res.data)
+						if (res.data.success == true) {
+							that.alert_modal = '记录修改成功'
+							that.alertModal_show = true
+							setTimeout(function() {
+								that.alertModal_show = false
+								that.GetReceiveRecord()
+								
+							}, 2000);
+							
+							
+						} else {
+							uni.showToast({
+								title: res.data.error.message,
+								duration: 2000
+							});
+						}
+				
+					}
+				
+				});
+			},
 			GetPODetail() {
 				let that = this
 				uni.request({
@@ -188,6 +311,31 @@
 			SureSubmit() {
 				this.SubmitByBillCode()
 			},
+			GetReceiveRecord() {
+				let that = this
+				uni.request({
+					url: that.connect_url + 'api/services/wmspda/po/GetReceiveRecord', //仅为示例，并非真实接口地址。
+					data: {
+						BillCode: that.BillCode,
+						MAC: that.MAC,
+						Type: that.Type
+
+					},
+					method: 'POST',
+					header: that.post_header,
+					success: (res) => {
+						console.log(res.data)
+						if (res.data.success == true) {
+							that.InventoryList_data = res.data.result
+						} else {
+							uni.showToast({
+								title: res.data.error.message,
+								duration: 2000
+							});
+						}
+					}
+				});
+			},
 			SubmitByBillCode() {
 				let that = this
 				uni.request({
@@ -206,9 +354,10 @@
 							that.alertModal_show = true
 							setTimeout(function() {
 								that.alertModal_show = false
+								uni.navigateTo({
+									url: '../PurchaseList/PurchaseList'
+								});
 							}, 2000);
-
-
 						} else {
 							uni.showToast({
 								title: res.data.error.message,
@@ -216,7 +365,6 @@
 							});
 						}
 					}
-
 				});
 			}
 
@@ -224,6 +372,7 @@
 		onLoad() {
 			// this.MacInfo();
 			let that = this
+			that.initPosition()
 			that.BillCode = uni.getStorageSync('BillCode')
 			that.BillCodeDetail = uni.getStorageSync('BillCodeDetail')
 			that.order_text_list = that.BillCodeDetail.billCode

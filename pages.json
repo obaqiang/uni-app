@@ -6,6 +6,12 @@
 			}
 		},
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
 			"path": "pages/blueToothPrint/blueToothPrint",
 			"style": {
 				"navigationBarTitleText": "蓝牙打印"
@@ -208,11 +214,6 @@
 				"navigationBarTitleText": "登录模板"
 			}
 		}, {
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		}, {
 			"path": "pages/reg/reg",
 			"style": {
 				"navigationBarTitleText": "注册"
@@ -235,12 +236,12 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/homepage/homepage",
-			"text": "",
+			"text": "智能仓储",
 			"iconPath": "static/img/home_unselected.png",
 			"selectedIconPath": "static/img/home_selected.png"
 		}, {
 			"pagePath": "pages/mine/mine",
-			"text": "",
+			"text": "个人中心",
 			"iconPath": "static/img/home_set_unselected.png",
 			"selectedIconPath": "static/img/home_set_selected.png"
 		}]

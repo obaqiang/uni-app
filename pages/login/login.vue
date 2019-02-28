@@ -23,6 +23,7 @@
                 <image :src="provider.image" @tap="oauth(provider.value)"></image>
             </view>
         </view>
+		<view class="common_btn_bot_fb">按钮</view>
     </view>
 </template>
 

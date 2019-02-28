@@ -152,6 +152,7 @@
 		},
 
 		methods: {
+			
 			gotochangePwd() {
 				uni.navigateTo({
 					url: '../changePwd/changePwd'

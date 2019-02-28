@@ -9,7 +9,7 @@
 			<text>到货</text>
 			<text>入库</text>
 		</view>
-		<view class="head_area" v-for="item in table_list" @tap="tapMater(item.id)">
+		<view class="head_area" v-for="(item,index) in table_list" :key="item" @tap="tapMater(item.id)">
 			<text>{{item.id}}</text>
 			<text>{{item.materialCode}}</text>
 			<text>{{item.countQty}}</text>

@@ -1,14 +1,4 @@
 
-.list_in{
-	color: #999999;
-}
-.inventory_list{
-	padding-left: 50rpx;
-	border-bottom: 1rpx solid #DDDDDD;
-	padding-bottom: 20rpx;
-}
-
-
 .show_modal_mask {
 	width: 100%;
 	height: 100%;

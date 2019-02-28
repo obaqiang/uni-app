@@ -1598,7 +1598,7 @@ radio-group ._label, checkbox-group ._label{
 .uni-icon-scan:before {
     content: "\E612";
 }
-.common_bot_btn{
+.common_bot_btn {
 	position: absolute;
 	width: 750rpx;
 	height: 100rpx;
@@ -1606,20 +1606,37 @@ radio-group ._label, checkbox-group ._label{
 	color: #FFFFFF;
 	background: #FFB700;
 	text-align: center;
+	bottom: 0;
 }
-.common_area{
+.common_area {
 	background: #FFFFFF;
 	width: 700rpx;
 	display: block;
 	margin: 25rpx;
 	border-radius: 10rpx;
 }
-.common_title{
+.common_title {
 	font-size: 28rpx;
 	font-weight: bold;
 	border-bottom: 1rpx solid #DDDDDD;
 	line-height: 72rpx;
 	padding-left: 30rpx;
+}
+.common_btn_bot_fb {
+	background: #FFB700;
+	color: #FFFFFF;
+	width: 700rpx;
+	line-height: 90rpx;
+	margin: auto;
+	border-radius: 10rpx;
+	text-align: center;
+}
+.common_btn_fb{
+	background: #FFB700;
+	color: #FFFFFF;
+	width: 700rpx;
+	margin: 30rpx 25rpx;
+	font-size: 25rpx;
 }
 	/* uni-app默认全局使用flex布局。因为flex布局有利于跨更多平台，尤其是采用原生渲染的平台。如不了解flex布局，请参考http://www.w3.org/TR/css3-flexbox/。如不使用flex布局，请删除或注释掉本行。*/
 page {

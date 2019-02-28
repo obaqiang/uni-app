@@ -87,7 +87,7 @@
 	display: -ms-flexbox;
 	display: flex;
 	width: 750rpx;
-	line-height: 60rpx;
+	line-height: 40rpx;
 }
 .mes_list text:nth-child(1){
 	width: 200rpx;
@@ -103,7 +103,7 @@
 }
 
 
-.head_area{
+.head_area {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -112,11 +112,11 @@
 	border-bottom: 1rpx solid #DDDDDD;
 	line-height: 100rpx;
 }
-.head_area text{
+.head_area text {
 	width: 90rpx;
 	text-align: center;
 }
-.head_area text:nth-child(2){
+.head_area text:nth-child(2) {
 	width: 210rpx;
 	text-align: center;
 }
@@ -419,6 +419,16 @@
 	    -ms-flex-pack: center;
 	        justify-content: center;
 	color: #FFFFFF;
+}
+
+
+.list_in {
+	color: #999999;
+}
+.inventory_list {
+	padding-left: 50rpx;
+	border-bottom: 1rpx solid #DDDDDD;
+	padding-bottom: 20rpx;
 }
 
 

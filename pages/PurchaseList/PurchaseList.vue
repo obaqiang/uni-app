@@ -1,9 +1,11 @@
 <template>
 	<view>
-		<scanInput v-bind:placeholder_text="order_text" v-bind:scan_input_text="order" v-on:scanAInputSuc="scanAInputSuc"/>
-		<scanInput v-bind:placeholder_text="supplier_text" v-bind:scan_input_text="supplier" v-on:scanBInputSuc="scanBInputSuc"/>
+		<scanInput v-bind:placeholder_text="order_text" v-bind:scan_input_text="order" v-bind:scan_icon_show="true"
+		 v-on:scanAInputSuc="scanAInputSuc" />
+		<scanInput v-bind:placeholder_text="supplier_text" v-bind:scan_input_text="supplier" v-bind:scan_icon_show="false"
+		 v-on:scanBInputSuc="scanBInputSuc" />
 		<button class="common_btn_fb" @tap="goSearch">搜索</button>
-		<view class="purchase_list" v-for="item in result_list" @tap="goDetail(item.billCode)">
+		<view class="purchase_list" v-for="(item,index) in result_list" @tap="goDetail(item.billCode)" :key="item">
 			<view class="purchase_list_a">
 				<text>{{item.billCode}}</text>
 				<text>{{item.billDate}}</text>
@@ -37,7 +39,7 @@
 				SupplierCode: '',
 				Type: '11',
 				MAC: '00-50-56-C0-00-01',
-				result_list:''
+				result_list: ''
 
 			};
 		},
@@ -73,33 +75,49 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data);
-						that.result_list = res.data.result
+
+						if (res.data.success == true) {
+							that.result_list = res.data.result
+						} else {
+							uni.showToast({
+								title: res.data.error.message,
+								duration: 2000
+							});
+						}
 					}
 
 				});
 			},
-			goDetail(billCode){
+			goDetail(billCode) {
 				let that = this
-				for(let i =0;i<that.result_list.length;i++){
-					if(billCode==that.result_list[i].billCode){
-						uni.setStorageSync('BillCodeDetail',that.result_list[i])
-						uni.setStorageSync('BillId',that.result_list[i].id)
+				for (let i = 0; i < that.result_list.length; i++) {
+					if (billCode == that.result_list[i].billCode) {
+						uni.setStorageSync('BillCodeDetail', that.result_list[i])
+						uni.setStorageSync('BillId', that.result_list[i].id)
 					}
 				}
-				uni.setStorageSync('BillCode',billCode)
+				uni.setStorageSync('BillCode', billCode)
 				uni.navigateTo({
 					url: '../ItemInventory/ItemInventory'
 				});
 			},
-			goSearch(){
+			goSearch() {
 				let that = this
-				that.GetPO()
+				if (that.BillCode == '') {
+					uni.showModal({
+						title: '提示',
+						content: '单号不能为空',
+					})
+				} else {
+					that.GetPO()
+				}
+
 			},
-			scanAInputSuc(e){
+			scanAInputSuc(e) {
 				let that = this
 				that.BillCode = e
 			},
-			scanBInputSuc(e){
+			scanBInputSuc(e) {
 				let that = this
 				that.SupplierCode = e
 			}
@@ -107,6 +125,7 @@
 		},
 		onLoad() {
 			// this.MacInfo();
+
 
 		}
 	}

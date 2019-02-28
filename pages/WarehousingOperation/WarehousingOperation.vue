@@ -3,7 +3,7 @@
 		<image class="stock_in_bg" :src="stock_in_bg"></image>
 		<view class="warehousingopration_bl" v-if="text_a_list!=''">
 			<text class="warehousingopration_bl_text">{{text_a}}</text>
-			<view class="warehousingopration_bl_bl" v-for="item in text_a_list" @tap="gotoPage(item.permissionCode)">
+			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_a_list" :key="item" @tap="gotoPage(item.permissionCode)">
 				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Po'" class="stock_in_sendpro_order" :src="stock_in_sendpro_order"
 				 mode=""></image>
 				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Asn'" class="stock_in_sendpro_order" :src="stock_in_buy_order"
@@ -23,7 +23,7 @@
 		</view>
 		<view class="warehousingopration_bl" v-if="text_b_list!=''">
 			<text class="warehousingopration_bl_text">{{text_b}}</text>
-			<view class="warehousingopration_bl_bl" v-for="item in text_b_list">
+			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_b_list" :key="item">
 				<image class="stock_in_sendpro_order" :src="stock_in_pro_come_in" mode=""></image>
 				<text>来料入库</text>
 			</view>

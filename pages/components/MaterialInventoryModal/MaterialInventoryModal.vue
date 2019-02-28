@@ -29,7 +29,7 @@
 				</view>
 				<view class="show_modal_body_list">
 					<text>清点数:</text>
-					<input class="show_modal_body_list_input" type="text" placeholder="请输入清点数" v-model="new_data_f">
+					<input class="show_modal_body_list_input" type="text" placeholder="请输入清点数" v-model="new_data_f" @focus="focusInput">
 				</view>
 				<view class="show_modal_body_list">
 					<text>备品数:</text>
@@ -68,10 +68,22 @@
 		methods: {
 			showModalBtn(e) {
 				// 将清点数和备品的input数据保存起来
+				if(this.new_data_f==''){
+					this.new_data_f = 0
+				}
+				if(this.new_data_g==''){
+					this.new_data_g = 0
+				}
 				uni.setStorageSync('data_f', this.new_data_f)
 				uni.setStorageSync('data_g', this.new_data_g)
+				
 				this.$emit('showModalBtn', e);
 			},
+			focusInput(){
+				console.log(123)
+				this.new_data_f=''
+				
+			}
 
 		},
 		onLoad() {
@@ -86,7 +98,7 @@
 		height: 100%;
 		background: #000000;
 		opacity: 0.2;
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		z-index: 1000;

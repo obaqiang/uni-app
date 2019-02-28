@@ -58,6 +58,13 @@ const store = new Vuex.Store({
 		changePostHeader(state, post_header) {
 			state.post_header = post_header
 		},
+		initPosition() {
+			// 防止页面因为input弹起
+			uni.pageScrollTo({
+				scrollTop: 0,
+				duration: 0
+			});
+		},
 		MyLoginSucRes(state, res,that) {
 			if (res.data.success == true) {
 				if (res.data.result.currentOrgUnit == null) {

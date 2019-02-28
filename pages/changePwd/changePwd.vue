@@ -13,15 +13,18 @@
 	<view>
 		<view class="user_info_list">
 			<text>原密码:</text>
-			<input :type="pwd_type" class="changepwdinput" v-model="oldpwd" placeholder="输入原密码">
+			<input type="passwprd" v-if="pwd_type=='password'" class="changepwdinput" v-model="oldpwd" placeholder="输入原密码">
+			<input type="number" v-if="pwd_type!='password'" class="changepwdinput" v-model="oldpwd" placeholder="输入原密码">
 		</view>
 		<view class="user_info_list">
 			<text>新密码:</text>
-			<input :type="pwd_type" class="changepwdinput" v-model="newpwd" placeholder="输入新密码">
+			<input type="passwprd" v-if="pwd_type=='password'" class="changepwdinput" v-model="newpwd" placeholder="输入新密码">
+			<input type="number" v-if="pwd_type!='password'" class="changepwdinput" v-model="newpwd" placeholder="输入新密码">
 		</view>
 		<view class="user_info_list">
 			<text>再一次密码:</text>
-			<input :type="pwd_type" v-model="newpwdagain" class="changepwdinput" placeholder="输入再次新密码">
+			<input type="passwprd" v-if="pwd_type=='password'" v-model="newpwdagain" class="changepwdinput" placeholder="输入再次新密码">
+			<input type="number" v-if="pwd_type!='password'" v-model="newpwdagain" class="changepwdinput" placeholder="输入再次新密码">
 		</view>
 		<view class="changetype_area" @tap="changeInputType">
 			<image :src="changepwd_no_hook" class="changepwd_no_hook" v-if="pwd_type=='password'"></image>
