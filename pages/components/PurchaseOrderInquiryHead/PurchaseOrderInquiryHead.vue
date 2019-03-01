@@ -6,7 +6,7 @@
 		</view>
 		<view class="PurchaseOrderInquiryHead_head_input_area">
 			订单号
-			<input class="PurchaseOrderInquiryHead_uni-input"  :placeholder="c_text" />
+			<input class="PurchaseOrderInquiryHead_uni-input"  :placeholder="c_text" @confirm="getAsnCode" v-model="asn_code"/>
 		</view>
 		<image class="PurchaseOrderInquiryHead_query_scan_icon" :src="query_scan"></image>
 	</view>
@@ -18,8 +18,14 @@
 		data() {
 			return {
 				query_scan: "../../static/img/query_scan.png",
+				asn_code:''
 			};
 		},
+		methods:{
+			getAsnCode(){
+				this.$emit('getAsnCode',this.asn_code)
+			}
+		}
 	}
 </script>
 
@@ -46,6 +52,8 @@
 		border-radius: 10upx;
 		margin-left: 20upx;
 		width: 550upx;
+		background: #FFFFFF;
+		padding: 10upx;
 	}
 	.PurchaseOrderInquiryHead_uni-input:hover{
 		border: 1px solid #FFB700;

@@ -1,6 +1,6 @@
 <template>
 	<view class="inventory_area">
-		<view class="inventory_list" v-for="(item,index) in InventoryList_data" :key="item" @tap="modal_copyshow(item.id)">
+		<view class="inventory_list" v-for="(item,index) in InventoryList_data" :key="index" @tap="modal_copyshow(item.id)">
 			<text>{{index+1}}</text>
 			<view class="list_in">
 				<text>物料编码:</text>

@@ -66,7 +66,7 @@
 				// password: '123qwe',
 				password: '',
 				deviceType: '8',
-				mac: '02-F4-8D-CB-0A-41',
+				// mac: '02-F4-8D-CB-0A-41',
 				showchoservermodal: false,
 				TenantId: '1',
 				ClientCode: 'WPDA',
@@ -96,6 +96,9 @@
 			post_header() {
 				return this.$store.state.post_header
 			},
+			MAC() {
+				return this.$store.state.MAC
+			},
 			i18n() {
 				return this.$t('mylogin')
 			},
@@ -108,6 +111,7 @@
 			...mapMutations(['changePostHeader']),
 			...mapMutations(['MyLoginSucRes']),
 			...mapMutations(['initPosition']),
+			...mapMutations(['MacInfo']),
 			bindLogin() {
 				/**
 				 * 客户端对账号信息进行一些必要的校验。
@@ -128,6 +132,7 @@
 					});
 					return;
 				}
+				
 				this.ClientLogin()
 
 			},
@@ -167,8 +172,8 @@
 				}
 			},
 			ClientLogin() {
-
 				let that = this
+				that.MacInfo()
 				uni.request({
 					url: that.connect_url + 'api/Account/ClientLogin', //仅为示例，并非真实接口地址。
 					data: {
@@ -176,7 +181,7 @@
 						usernameOrEmailAddress: that.usernameOrEmailAddress,
 						password: that.password,
 						deviceType: that.deviceType,
-						mac: that.mac
+						MAC: that.MAC
 
 					},
 					method: 'POST',

@@ -5,7 +5,7 @@
 		<scanInput v-bind:placeholder_text="supplier_text" v-bind:scan_input_text="supplier" v-bind:scan_icon_show="false"
 		 v-on:scanBInputSuc="scanBInputSuc" />
 		<button class="common_btn_fb" @tap="goSearch">搜索</button>
-		<view class="purchase_list" v-for="(item,index) in result_list" @tap="goDetail(item.billCode)" :key="item">
+		<view class="purchase_list" v-for="(item,index) in result_list" @tap="goDetail(item.billCode)" :key="index">
 			<view class="purchase_list_a">
 				<text>{{item.billCode}}</text>
 				<text>{{item.billDate}}</text>
@@ -37,8 +37,7 @@
 				supplier_text: '请输入供应商',
 				BillCode: '',
 				SupplierCode: '',
-				Type: '11',
-				MAC: '00-50-56-C0-00-01',
+				Type: '',
 				result_list: ''
 
 			};
@@ -54,16 +53,20 @@
 			post_header() {
 				return this.$store.state.post_header
 			},
+			MAC() {
+				return this.$store.state.MAC
+			},
 		},
 
 		methods: {
 			...mapMutations(['MacInfo']),
 			...mapMutations(['changeToken']),
 			...mapMutations(['changeOrgId']),
+			...mapMutations(['ErrRequestShow']),
 			GetPO() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/PO/GetPO', //仅为示例，并非真实接口地址。
+					url: that.connect_url + 'api/services/wmspda/PO/GetPO',
 					data: {
 						BillCode: that.BillCode,
 						SupplierCode: that.SupplierCode,
@@ -75,15 +78,11 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data);
-
+						that.ErrRequestShow(res)
 						if (res.data.success == true) {
 							that.result_list = res.data.result
-						} else {
-							uni.showToast({
-								title: res.data.error.message,
-								duration: 2000
-							});
 						}
+
 					}
 
 				});
@@ -125,8 +124,9 @@
 		},
 		onLoad() {
 			// this.MacInfo();
-
-
+			let that = this
+			that.Type = uni.getStorageSync('Type')
+			console.log(that.Type)
 		}
 	}
 </script>

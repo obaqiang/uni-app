@@ -6,7 +6,7 @@
 		 v-bind:supplier_man="supplier_man" v-bind:supplier_man_list="supplier_man_list" v-if="left_show" />
 		<PurchaseOrderInquirybodyC v-bind:table_list="table_list" v-bind:PurchaseOrderInquirybodyC_from="PurchaseOrderInquirybodyC_from"
 		 v-if="left_show" v-on:tapMater="tapMater" />
-		<MaterialInventoryModal v-bind:data_a="data_a" v-bind:data_b="data_b" v-bind:data_c="data_c" v-bind:data_d="data_d"
+		<MaterialInventoryModal v-bind:PurchaseOrderInquirybodyC_from="PurchaseOrderInquirybodyC_from" v-bind:data_a="data_a" v-bind:data_b="data_b" v-bind:data_c="data_c" v-bind:data_d="data_d"
 		 v-bind:data_e="data_e" v-bind:data_f="data_f" v-bind:data_g="data_g" v-bind:show_modal_header="show_modal_header"
 		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtn="showModalBtn"
 		 v-if="MaterialInventoryModal_show" />
@@ -63,7 +63,6 @@
 				alertModal_show: false,
 				left_show: true,
 				BillCode: '',
-				Type: '',
 				// MAC: '00-50-56-C0-00-01',
 				BillCodeDetail: '',
 				table_list: '',
@@ -89,7 +88,7 @@
 				record_data_g: '',
 				ReceiveRecordId: '',
 				positionTop: '',
-				PurchaseOrderInquirybodyC_from: 'ItemInventory'
+				PurchaseOrderInquirybodyC_from: 'ItemInventoryAsn'
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -133,7 +132,7 @@
 				console.log(e)
 				this.left_show = e
 				if (e == true) { //物料清点
-					this.GetPODetail()
+					this.GetAsnDetail()
 				} else { //清点记录
 					this.GetReceiveRecord()
 				}
@@ -153,13 +152,21 @@
 				that.data_a = e.materialCode
 				// 物料名称
 				that.data_b = e.materialName
-				// 清点数为采购减去到货减去清点
-				that.data_f = e.poQty - e.arrivalQty - e.countQty
+
+				// 清点数为采购减去到货减去清点(ItemInventory进来)
+				// that.data_f = e.poQty - e.arrivalQty - e.countQty
+
+				// 清点数为送货减去已收减去清点(ItemInventoryAsn送货进来)
+				that.data_f = e.asnQty - e.recvQty - e.countQty
 				console.log('清点数：' + that.data_f)
 				// 采购数
-				that.data_d = e.poQty
+				// that.data_d = e.poQty
 				// 到货数
-				that.data_e = e.arrivalQty
+				// that.data_e = e.arrivalQty
+				// 送货数
+				that.data_d = e.asnQty
+				// 已收数
+				that.data_e = e.recvQty
 				// 单据明细id
 				that.DetailId = e.id
 				// 单据id
@@ -183,11 +190,11 @@
 			SaveReceive() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/PO/SaveReceive', //仅为示例，并非真实接口地址。
+					url: that.connect_url + 'api/services/wmspda/Asn/SaveReceive', //仅为示例，并非真实接口地址。
 					data: {
 						BillCode: that.BillCode,
 						MAC: that.MAC,
-						Type: that.Type,
+						// Type: that.Type,
 						BillId: that.BillId,
 						DetailId: that.DetailId,
 						CountQty: that.CountQty,
@@ -206,7 +213,7 @@
 								title: '物料清点保存成功',
 								duration: 2000
 							})
-							that.GetPODetail()
+							that.GetAsnDetail()
 						}
 
 					}
@@ -216,7 +223,7 @@
 			DeleteReceiveRecord() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/po/DeleteReceiveRecord',
+					url: that.connect_url + 'api/services/wmspda/asn/DeleteReceiveRecord',
 					data: {
 						MAC: that.MAC,
 						ReceiveRecordId: that.ReceiveRecordId,
@@ -246,7 +253,7 @@
 			ModifyReceiveRecord() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/po/ModifyReceiveRecord',
+					url: that.connect_url + 'api/services/wmspda/asn/ModifyReceiveRecord',
 					data: {
 						MAC: that.MAC,
 						ReceiveRecordId: that.ReceiveRecordId,
@@ -273,20 +280,19 @@
 
 				});
 			},
-			GetPODetail() {
+			GetAsnDetail() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/PO/GetPODetail', //仅为示例，并非真实接口地址。
+					url: that.connect_url + 'api/services/wmspda/Asn/GetAsnDetail', //仅为示例，并非真实接口地址。
 					data: {
 						BillCode: that.BillCode,
-						Type: that.Type,
+						// Type: that.Type,
 						MAC: that.MAC
-
 					},
 					method: 'POST',
 					header: that.post_header,
 					success: (res) => {
-						that.ErrRequestShow(res)
+						console.log(res)
 						if (res.data.success) {
 							let arr = res.data.result
 							for (let i = 0; i < arr.length; i++) {
@@ -297,7 +303,9 @@
 								}
 							}
 							that.table_list = arr
-						} 
+						} else {
+							that.ErrRequestShow(res)
+						}
 					}
 
 				});
@@ -308,7 +316,7 @@
 			GetReceiveRecord() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/po/GetReceiveRecord', //仅为示例，并非真实接口地址。
+					url: that.connect_url + 'api/services/wmspda/po/GetReceiveRecord', 
 					data: {
 						BillCode: that.BillCode,
 						MAC: that.MAC,
@@ -329,7 +337,7 @@
 			SubmitByBillCode() {
 				let that = this
 				uni.request({
-					url: that.connect_url + 'api/services/wmspda/Scan/SubmitByBillCode', //仅为示例，并非真实接口地址。
+					url: that.connect_url + 'api/services/wmspda/Scan/SubmitByBillCode', 
 					data: {
 						BillCode: that.BillCode,
 						MAC: that.MAC
@@ -339,21 +347,17 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.ErrRequestShow(res)
 						if (res.data.success == true) {
 							that.alert_modal = '提交清点成功'
 							that.alertModal_show = true
 							setTimeout(function() {
 								that.alertModal_show = false
 								uni.navigateTo({
-									url: '../PurchaseList/PurchaseList'
+									url: '../DeliveryOrderInquiry/DeliveryOrderInquiry'
 								});
 							}, 2000);
-						} else {
-							uni.showToast({
-								title: res.data.error.message,
-								duration: 2000
-							});
-						}
+						} 
 					}
 				});
 			}
@@ -362,17 +366,14 @@
 		onLoad() {
 			// this.MacInfo();
 			let that = this
-			that.Type = uni.getStorageSync('Type')
-
-			that.BillCode = uni.getStorageSync('BillCode')
-
 			that.BillCodeDetail = uni.getStorageSync('BillCodeDetail')
-
+			console.log(that.BillCodeDetail)
+			that.BillCode = that.BillCodeDetail.billCode
 			that.order_text_list = that.BillCodeDetail.billCode
 			that.order_time_list = that.BillCodeDetail.billDate
 			that.supplier_list = that.BillCodeDetail.supplierName
-			that.supplier_man_list = that.BillCodeDetail.purEmployeeName
-			that.GetPODetail()
+			that.supplier_man_list = that.BillCodeDetail.createrName
+			that.GetAsnDetail()
 		}
 	}
 </script>

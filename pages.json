@@ -6,6 +6,12 @@
 			}
 		},
 		{
+				"path": "pages/ItemInventoryAsn/ItemInventoryAsn",
+				"style": {
+					"navigationBarTitleText": "送货单"
+				}
+			},
+		{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"

@@ -3,7 +3,7 @@
 		<image class="stock_in_bg" :src="stock_in_bg"></image>
 		<view class="warehousingopration_bl" v-if="text_a_list!=''">
 			<text class="warehousingopration_bl_text">{{text_a}}</text>
-			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_a_list" :key="item" @tap="gotoPage(item.permissionCode)">
+			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_a_list" :key="index" @tap="gotoPage(item.permissionCode)">
 				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Po'" class="stock_in_sendpro_order" :src="stock_in_sendpro_order"
 				 mode=""></image>
 				<image v-if="item.permissionCode=='Pages.WPDA.Instock.Receipt.Asn'" class="stock_in_sendpro_order" :src="stock_in_buy_order"
@@ -23,7 +23,7 @@
 		</view>
 		<view class="warehousingopration_bl" v-if="text_b_list!=''">
 			<text class="warehousingopration_bl_text">{{text_b}}</text>
-			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_b_list" :key="item">
+			<view class="warehousingopration_bl_bl" v-for="(item,index) in text_b_list" :key="index">
 				<image class="stock_in_sendpro_order" :src="stock_in_pro_come_in" mode=""></image>
 				<text>来料入库</text>
 			</view>
@@ -103,13 +103,21 @@
 			gotoPage(page_name) {
 				let that = this
 				console.log(page_name)
-				switch (page_name) {
-					case 'Pages.WPDA.Instock.Receipt.Po':
-						uni.navigateTo({
-							url: '../PurchaseList/PurchaseList'
-						});
-						break;
-					default:
+				if(page_name=='Pages.WPDA.Instock.Receipt.Po'){
+					//采购单
+					uni.setStorageSync('Type', 11)
+					uni.navigateTo({
+						url: '../PurchaseList/PurchaseList'
+					});
+				}else if(page_name=='Pages.WPDA.Instock.Receipt.OutSourcePo'){
+					uni.setStorageSync('Type', 12)
+					uni.navigateTo({
+						url: '../PurchaseList/PurchaseList'
+					});
+				}else if(page_name=='Pages.WPDA.Instock.Receipt.Asn'){
+					uni.navigateTo({
+						url: '../DeliveryOrderInquiry/DeliveryOrderInquiry'
+					});
 				}
 			}
 		},

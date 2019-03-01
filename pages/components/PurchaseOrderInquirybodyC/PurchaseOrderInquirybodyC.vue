@@ -5,17 +5,21 @@
 			<text>物料编码</text>
 			<text>清点</text>
 			<text>备品</text>
-			<text>采购</text>
-			<text>到货</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">采购</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">到货</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">送货</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">已收</text>
 			<text>入库</text>
 		</view>
-		<view class="head_area" v-for="(item,index) in table_list" :key="item" @tap="tapMater(item.id)">
-			<text>{{item.id}}</text>
+		<view class="head_area" v-for="(item,index) in table_list" :key="index" @tap="tapMater(item.id)">
+			<text>{{index+1}}</text>
 			<text>{{item.materialCode}}</text>
 			<text>{{item.countQty}}</text>
 			<text>{{item.giveQty}}</text>
-			<text>{{item.poQty}}</text>
-			<text>{{item.arrivalQty}}</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">{{item.poQty}}</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">{{item.arrivalQty}}</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">{{item.asnQty}}</text>
+			<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">{{item.recvQty}}</text>
 			<text>{{item.inStockQty}}</text>
 		</view>
 	</view>
@@ -23,7 +27,7 @@
 
 <script>
 	export default {
-		props: ['table_list'],
+		props: ['table_list','PurchaseOrderInquirybodyC_from'],
 		data() {
 			return {
 				

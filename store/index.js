@@ -21,7 +21,8 @@ const store = new Vuex.Store({
 		],
 		current_version: 103,
 		deviceType: 8,
-		post_header: ''
+		post_header: '',
+		MAC:''
 	},
 	mutations: {
 		login(state, userName) {
@@ -32,16 +33,16 @@ const store = new Vuex.Store({
 			state.userName = "";
 			state.hasLogin = false;
 		},
-		MacInfo() {
-			var locator = new ActiveXObject("WbemScripting.SWbemLocator");
-			var service = locator.ConnectServer(".");
-			var properties = service.ExecQuery("Select * from Win32_NetworkAdapterConfiguration Where IPEnabled =True");
-			var e = new Enumerator(properties); {
-				var p = e.item();
-				var mac = p.MACAddress;
-				console.log(mac)
-				return (mac)
-			}
+		MacInfo(state) {
+			state.MAC = "00-50-56-C0-00-01"
+// 			var locator = new ActiveXObject("WbemScripting.SWbemLocator");
+// 			var service = locator.ConnectServer(".");
+// 			var properties = service.ExecQuery("Select * from Win32_NetworkAdapterConfiguration Where IPEnabled =True");
+// 			var e = new Enumerator(properties); {
+// 				var p = e.item();
+// 				var mac = p.MACAddress;
+// 				return (mac)
+// 			}
 		},
 		changeServerUrl(state, choosed_url) {
 			state.connect_url = choosed_url
@@ -65,7 +66,26 @@ const store = new Vuex.Store({
 				duration: 0
 			});
 		},
-		MyLoginSucRes(state, res,that) {
+		// 请求发生失败时发起提醒
+		ErrRequestShow(state,res) {
+			console.log(res)
+			if (res.data.success != true) {
+				uni.showToast({
+					icon: 'none',
+					title: res.data.error.message,
+					duration: 2000
+				});
+			} else {
+				if (res.data.result.length == 0) {
+					uni.showToast({
+						icon: 'none',
+						title: '未搜索到数据',
+						duration: 2000
+					});
+				}
+			}
+		},
+		MyLoginSucRes(state, res, that) {
 			if (res.data.success == true) {
 				if (res.data.result.currentOrgUnit == null) {
 					uni.showToast({

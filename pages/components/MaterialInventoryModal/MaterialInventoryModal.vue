@@ -20,11 +20,13 @@
 					<text>{{data_c}}</text>
 				</view> -->
 				<view class="show_modal_body_list">
-					<text>采购数:</text>
+					<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">采购数:</text>
+					<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">送货数:</text>
 					<text>{{data_d}}</text>
 				</view>
 				<view class="show_modal_body_list">
-					<text>到货数:</text>
+					<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventory'">到货数:</text>
+					<text v-if="PurchaseOrderInquirybodyC_from=='ItemInventoryAsn'">已收数:</text>
 					<text>{{data_e}}</text>
 				</view>
 				<view class="show_modal_body_list">
@@ -50,7 +52,7 @@
 <script>
 	export default {
 		props: ['show_modal_header', 'show_modal_body', 'show_modal_from', 'updata_url', 'data_a', 'data_b', 'data_c',
-			'data_d', 'data_e', 'data_f', 'data_g'
+			'data_d', 'data_e', 'data_f', 'data_g','PurchaseOrderInquirybodyC_from'
 		],
 		components: {
 
