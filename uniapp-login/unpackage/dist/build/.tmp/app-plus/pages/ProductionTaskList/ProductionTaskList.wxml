@@ -1,0 +1,2 @@
+<import src="./ProductionTaskList.vue.wxml" />
+    <template is="1584ad7c" data="{{ ...$root['0'], $root }}"/>

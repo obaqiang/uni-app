@@ -1,0 +1,2 @@
+<import src="./UserInfo.vue.wxml" />
+    <template is="da887dbc" data="{{ ...$root['0'], $root }}"/>

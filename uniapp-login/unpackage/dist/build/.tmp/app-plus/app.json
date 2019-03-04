@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/mylogin/mylogin",
+    "pages/login/login",
+    "pages/blueToothPrint/blueToothPrint",
+    "pages/chooslan/chooslan",
+    "pages/OrganizationalSwitching/OrganizationalSwitching",
+    "pages/changePwd/changePwd",
+    "pages/ProductionTaskList/ProductionTaskList",
+    "pages/DeliveryOrderInquiry/DeliveryOrderInquiry",
+    "pages/ItemInventory/ItemInventory",
+    "pages/PurchaseList/PurchaseList",
+    "pages/DeviceInfo/DeviceInfo",
+    "pages/UserInfo/UserInfo",
+    "pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh",
+    "pages/IncomingQualityInspection/IncomingQualityInspection",
+    "pages/qualityInspection/qualityInspection",
+    "pages/StockCheck/StockCheck",
+    "pages/DetailsOfRejectionOrdersPurchase/DetailsOfRejectionOrdersPurchase",
+    "pages/SingleWithdrawalPurchase/SingleWithdrawalPurchase",
+    "pages/ProcurementReclaim/ProcurementReclaim",
+    "pages/MaterialInventory/MaterialInventory",
+    "pages/Outsourcing/Outsourcing",
+    "pages/OutgoingOperation/OutgoingOperation",
+    "pages/WarehousingOperation/WarehousingOperation",
+    "pages/DetailsOfDocuments/DetailsOfDocuments",
+    "pages/IncomingStorage/IncomingStorage",
+    "pages/DeliveryInventory/DeliveryInventory",
+    "pages/PurchaseOrderInquiry/PurchaseOrderInquiry",
+    "pages/homepage/homepage",
+    "pages/mine/mine",
+    "pages/morecountry/morecountry",
+    "pages/main/main",
+    "pages/reg/reg",
+    "pages/pwd/pwd",
+    "pages/user/user"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#ffb700",
+    "backgroundColor": "#fbf9fe"
+  },
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#7a7e83",
+    "selectedColor": "#FFB700",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "智能仓储",
+        "iconPath": "static/img/home_unselected.png",
+        "selectedIconPath": "static/img/home_selected.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "个人中心",
+        "iconPath": "static/img/home_set_unselected.png",
+        "selectedIconPath": "static/img/home_set_selected.png"
+      }
+    ]
+  },
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "uniapp-login"
+}

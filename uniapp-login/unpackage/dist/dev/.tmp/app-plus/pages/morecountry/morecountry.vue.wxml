@@ -1,0 +1,1 @@
+<template name="fc4dc474"><view class="_view fc4dc474 uni-content"><text class="_text fc4dc474">{{ i18n.invite }}</text><text class="_text fc4dc474">{{ i18n.game }}</text></view></template>

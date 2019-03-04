@@ -1,0 +1,105 @@
+
+.show_modal_mask {
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	opacity: 0.2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+.show_modal_area {
+	position: fixed;
+	width: 90%;
+	left: 5%;
+	z-index: 1001;
+	background: #FFFFFF;
+	top: 400rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	border-radius: 10rpx;
+}
+.show_modal_header {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	height: 100rpx;
+}
+.show_modal_body {
+	min-height: 200rpx;
+}
+.show_modal_footer {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-justify-content: space-around;
+	    -ms-flex-pack: distribute;
+	        justify-content: space-around;
+	width: 100%;
+	margin-bottom: 20rpx;
+}
+.show_modal_footer_btn_left {
+	background: #FFB700;
+	color: #FFFFFF;
+	width: 230rpx;
+	font-size: 28rpx;
+}
+.show_modal_footer_btn_right {
+	background: #E5E5E5;
+	color: #999999;
+	width: 230rpx;
+	font-size: 28rpx;
+}
+.de_list {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.de_input {
+	border: 1rpx solid #DDDDDD;
+	border-radius: 5rpx;
+	padding: 10rpx;
+}
+.de_info_list {
+	line-height: 100rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.de_info_list_left {
+	width: 200rpx;
+	text-align: right;
+}
+

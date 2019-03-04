@@ -1,0 +1,62 @@
+
+.DetailsOfDocumentsBody_body_area_body_area{
+	padding: 50rpx;
+}
+.DetailsOfDocumentsBody_body_area_body_bl{
+	background: #ffffff;
+}
+.DetailsOfDocumentsBody_body_text{
+	padding: 20rpx 30rpx;
+}
+.DetailsOfDocumentsBody_body_bl{
+	background: #FFFFFF;
+	border-radius: 10rpx;
+	margin: auto;
+	width: 700rpx;
+	margin-bottom: 20rpx;
+}
+.DetailsOfDocumentsBody_body_bl_a{
+	background: #fff6e3;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	height: 70rpx;
+}
+.DetailsOfDocumentsBody_body_bl_a text:nth-child(1){
+	width: 15%;
+	text-align: center;
+}
+.DetailsOfDocumentsBody_body_bl_a text:nth-child(2){
+	width: 70%;
+	text-align: left;
+}
+.DetailsOfDocumentsBody_body_bl_a text:nth-child(3){
+	width: 15%;
+	text-align: center;
+}
+.DetailsOfDocumentsBody_body_bl_b{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	height: 100rpx;
+	-webkit-justify-content: space-around;
+	    -ms-flex-pack: distribute;
+	        justify-content: space-around;
+	border-bottom: 1rpx solid #DDDDDD;
+}
+
+
+page {
+	background: #f2f2f2;
+}
+

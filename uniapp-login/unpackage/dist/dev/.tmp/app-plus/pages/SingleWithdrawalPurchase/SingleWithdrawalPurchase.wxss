@@ -1,0 +1,25 @@
+
+.mes_area{
+	padding-top: 50rpx;
+}
+.mes_list{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 750rpx;
+	line-height: 60rpx;
+}
+.mes_list text:nth-child(1){
+	width: 200rpx;
+	text-align: right;
+}
+.mes_list text:nth-child(2){
+	padding-left: 60rpx;
+}
+.bg_line{
+	height: 20rpx;
+	background: #e7e7ed;
+	margin-top: 50rpx;
+}
+

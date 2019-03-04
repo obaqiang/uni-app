@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <script>
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+        </script>
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"i]::-webkit-search-cancel-button {
+                display: none;
+            }
+
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"uniapp-login","entryPagePath":"pages/mylogin/mylogin.html","page":{"pages/mylogin/mylogin.html":{"window":{"navigationBarTitleText":""}},"pages/login/login.html":{"window":{"navigationBarTitleText":"登录"}},"pages/blueToothPrint/blueToothPrint.html":{"window":{"navigationBarTitleText":"蓝牙打印"}},"pages/chooslan/chooslan.html":{"window":{"navigationBarTitleText":""}},"pages/OrganizationalSwitching/OrganizationalSwitching.html":{"window":{"navigationBarTitleText":"组织切换"}},"pages/changePwd/changePwd.html":{"window":{"navigationBarTitleText":"修改密码"}},"pages/ProductionTaskList/ProductionTaskList.html":{"window":{"navigationBarTitleText":"生产任务单列表"}},"pages/DeliveryOrderInquiry/DeliveryOrderInquiry.html":{"window":{"navigationBarTitleText":"送货单查询"}},"pages/ItemInventory/ItemInventory.html":{"window":{"navigationBarTitleText":"物品清点"}},"pages/PurchaseList/PurchaseList.html":{"window":{"navigationBarTitleText":"采购单列表"}},"pages/DeviceInfo/DeviceInfo.html":{"window":{"navigationBarTitleText":"设备信息"}},"pages/UserInfo/UserInfo.html":{"window":{"navigationBarTitleText":"用户信息"}},"pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh.html":{"window":{"navigationBarTitleText":"来料质检（高检）"}},"pages/IncomingQualityInspection/IncomingQualityInspection.html":{"window":{"navigationBarTitleText":"来料质检（普检）"}},"pages/qualityInspection/qualityInspection.html":{"window":{"navigationBarTitleText":"品质检验（来料）"}},"pages/StockCheck/StockCheck.html":{"window":{"navigationBarTitleText":"库存查询"}},"pages/DetailsOfRejectionOrdersPurchase/DetailsOfRejectionOrdersPurchase.html":{"window":{"navigationBarTitleText":"退料单详情（采购）"}},"pages/SingleWithdrawalPurchase/SingleWithdrawalPurchase.html":{"window":{"navigationBarTitleText":"单个退料（采购）"}},"pages/ProcurementReclaim/ProcurementReclaim.html":{"window":{"navigationBarTitleText":"采购退料"}},"pages/MaterialInventory/MaterialInventory.html":{"window":{"navigationBarTitleText":"物料清点"}},"pages/Outsourcing/Outsourcing.html":{"window":{"navigationBarTitleText":"委外发料（审核）"}},"pages/OutgoingOperation/OutgoingOperation.html":{"window":{"navigationBarTitleText":"出库作业"}},"pages/WarehousingOperation/WarehousingOperation.html":{"window":{"navigationBarTitleText":"入库作业"}},"pages/DetailsOfDocuments/DetailsOfDocuments.html":{"window":{"navigationBarTitleText":"单据详情"}},"pages/IncomingStorage/IncomingStorage.html":{"window":{"navigationBarTitleText":"来料入库"}},"pages/DeliveryInventory/DeliveryInventory.html":{"window":{"navigationBarTitleText":"送货及清点"}},"pages/PurchaseOrderInquiry/PurchaseOrderInquiry.html":{"window":{"navigationBarTitleText":"采购单查询"}},"pages/homepage/homepage.html":{"window":{"navigationBarTitleText":"智能仓储","titleNView":{"buttons":[{"text":"","fontSrc":"/static/iconfont.ttf","fontSize":"22px","float":"right"}]}}},"pages/mine/mine.html":{"window":{"navigationBarTitleText":"个人中心"}},"pages/morecountry/morecountry.html":{"window":{"navigationBarTitleText":""}},"pages/main/main.html":{"window":{"navigationBarTitleText":"登录模板"}},"pages/reg/reg.html":{"window":{"navigationBarTitleText":"注册"}},"pages/pwd/pwd.html":{"window":{"navigationBarTitleText":"找回密码"}},"pages/user/user.html":{"window":{"navigationBarTitleText":"我的"}}},"global":{"window":{"navigationBarTextStyle":"white","navigationBarBackgroundColor":"#ffb700","backgroundColor":"#fbf9fe"}},"tabBar":{"color":"#7a7e83","selectedColor":"#FFB700","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/homepage/homepage.html","text":"智能仓储","iconPath":"static/img/home_unselected.png","selectedIconPath":"static/img/home_selected.png"},{"pagePath":"pages/mine/mine.html","text":"个人中心","iconPath":"static/img/home_set_unselected.png","selectedIconPath":"static/img/home_set_selected.png"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/mylogin/mylogin","pages/login/login","pages/blueToothPrint/blueToothPrint","pages/chooslan/chooslan","pages/OrganizationalSwitching/OrganizationalSwitching","pages/changePwd/changePwd","pages/ProductionTaskList/ProductionTaskList","pages/DeliveryOrderInquiry/DeliveryOrderInquiry","pages/ItemInventory/ItemInventory","pages/PurchaseList/PurchaseList","pages/DeviceInfo/DeviceInfo","pages/UserInfo/UserInfo","pages/IncomingQualityInspectionHigh/IncomingQualityInspectionHigh","pages/IncomingQualityInspection/IncomingQualityInspection","pages/qualityInspection/qualityInspection","pages/StockCheck/StockCheck","pages/DetailsOfRejectionOrdersPurchase/DetailsOfRejectionOrdersPurchase","pages/SingleWithdrawalPurchase/SingleWithdrawalPurchase","pages/ProcurementReclaim/ProcurementReclaim","pages/MaterialInventory/MaterialInventory","pages/Outsourcing/Outsourcing","pages/OutgoingOperation/OutgoingOperation","pages/WarehousingOperation/WarehousingOperation","pages/DetailsOfDocuments/DetailsOfDocuments","pages/IncomingStorage/IncomingStorage","pages/DeliveryInventory/DeliveryInventory","pages/PurchaseOrderInquiry/PurchaseOrderInquiry","pages/homepage/homepage","pages/mine/mine","pages/morecountry/morecountry","pages/main/main","pages/reg/reg","pages/pwd/pwd","pages/user/user"],"subPackages":[],"usingComponents":{},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false}}
+
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+            };
+
+        </script>
+        <script src="__uniappes6.js"></script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

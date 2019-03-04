@@ -1,0 +1,13 @@
+
+      !(function(){
+        var uniAppViewReadyCallback = function(){
+          setCssToHead([".",[1],"show_modal_mask { width: 100%; height: 100%; background: #000000; opacity: 0.2; position: absolute; top: 0; left: 0; z-index: 1000; }\n.",[1],"show_modal_area { position: fixed; width: 90%; left: 5%; z-index: 1001; background: #FFFFFF; top: ",[0,400],"; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; border-radius: ",[0,10],"; }\n.",[1],"show_modal_header { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; height: ",[0,100],"; }\n.",[1],"show_modal_body { min-height: ",[0,200],"; }\n.",[1],"show_modal_footer { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; -webkit-justify-content: space-around; -ms-flex-pack: distribute; justify-content: space-around; width: 100%; margin-bottom: ",[0,20],"; }\n.",[1],"show_modal_footer_btn_left { background: #FFB700; color: #FFFFFF; width: ",[0,230],"; font-size: ",[0,28],"; }\n.",[1],"show_modal_footer_btn_right { background: #E5E5E5; color: #999999; width: ",[0,230],"; font-size: ",[0,28],"; }\n.",[1],"de_list { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }\n.",[1],"de_input { border: ",[0,1]," solid #DDDDDD; border-radius: ",[0,5],"; padding: ",[0,10],"; }\n.",[1],"de_info_list { line-height: ",[0,100],"; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; }\n.",[1],"de_info_list_left { width: ",[0,200],"; text-align: right; }\n",],undefined,{path:"./pages/DeliveryInventory/DeliveryInventory.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/DeliveryInventory/DeliveryInventory.wxml') } }));
+        }
+        if(window.__uniAppViewReady__){
+          uniAppViewReadyCallback()
+        }else{
+          document.addEventListener('uniAppViewReady',uniAppViewReadyCallback)
+        }
+      })();
+      
