@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/mylogin/mylogin",
+    "pages/ItemInventoryAsn/ItemInventoryAsn",
     "pages/login/login",
     "pages/blueToothPrint/blueToothPrint",
     "pages/chooslan/chooslan",

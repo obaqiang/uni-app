@@ -1,2 +1,0 @@
-<import src="./DeliveryInventory.vue.wxml" />
-    <template is="71b7aa14" data="{{ ...$root['0'], $root }}"/>

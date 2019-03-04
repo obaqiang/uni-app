@@ -6,9 +6,19 @@
 		 v-bind:supplier_man="supplier_man" v-bind:supplier_man_list="supplier_man_list" v-if="left_show" />
 		<PurchaseOrderInquirybodyC v-bind:table_list="table_list" v-bind:PurchaseOrderInquirybodyC_from="PurchaseOrderInquirybodyC_from"
 		 v-if="left_show" v-on:tapMater="tapMater" />
-		<MaterialInventoryModal v-bind:data_a="data_a" v-bind:data_b="data_b" v-bind:data_c="data_c" v-bind:data_d="data_d"
-		 v-bind:data_e="data_e" v-bind:data_f="data_f" v-bind:data_g="data_g" v-bind:show_modal_header="show_modal_header"
-		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtn="showModalBtn"
+		<MaterialInventoryModal 
+		v-bind:data_a="data_a" 
+		v-bind:data_b="data_b" 
+		v-bind:data_c="data_c" 
+		v-bind:data_d="data_d"
+		 v-bind:data_e="data_e" 
+		 v-bind:data_f="data_f" 
+		 v-bind:data_g="data_g" 
+		 v-bind:show_modal_header="show_modal_header"
+		 v-bind:show_modal_body="show_modal_body"
+		  v-bind:show_modal_from="show_modal_from"
+		  v-bind:PurchaseOrderInquirybodyC_from = "PurchaseOrderInquirybodyC_from"
+		   v-on:showModalBtn="showModalBtn"
 		 v-if="MaterialInventoryModal_show" />
 		<alertModal v-bind:alert_modal="alert_modal" v-if="alertModal_show" />
 		<view class="common_bot_btn" @tap="SureSubmit" v-if="left_show">确认提交</view>
@@ -18,6 +28,7 @@
 		 v-bind:data_g="InventoryList_data_detail.giveQty" v-bind:show_modal_header="show_modal_header"
 		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtnA="showModalBtnA"
 		 v-if="record_modal_show" />
+		 <loadingWait v-if="loading_wait_show"/>
 	</view>
 </template>
 
@@ -29,6 +40,7 @@
 	import alertModal from "../components/alertModal/alertModal.vue"
 	import InventoryList from "../components/InventoryList/InventoryList.vue"
 	import RecordModal from "../components/RecordModal/RecordModal.vue"
+	import loadingWait from "../components/loadingWait/loadingWait.vue"
 	import {
 		mapState,
 		mapMutations
@@ -42,7 +54,8 @@
 			MaterialInventoryModal,
 			alertModal,
 			InventoryList,
-			RecordModal
+			RecordModal,
+			loadingWait
 		},
 
 		data() {
@@ -89,7 +102,8 @@
 				record_data_g: '',
 				ReceiveRecordId: '',
 				positionTop: '',
-				PurchaseOrderInquirybodyC_from: 'ItemInventory'
+				PurchaseOrderInquirybodyC_from: 'ItemInventory',
+				loading_wait_show:false
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -182,6 +196,7 @@
 			},
 			SaveReceive() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/PO/SaveReceive', //仅为示例，并非真实接口地址。
 					data: {
@@ -198,6 +213,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						if (res.data.success != true) {
 							that.ErrRequestShow(res)
 						} else {
@@ -215,6 +231,7 @@
 			},
 			DeleteReceiveRecord() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/po/DeleteReceiveRecord',
 					data: {
@@ -228,6 +245,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						if (res.data.success) {
 							uni.showToast({
 								icon: 'none',
@@ -245,6 +263,7 @@
 			},
 			ModifyReceiveRecord() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/po/ModifyReceiveRecord',
 					data: {
@@ -258,6 +277,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						if (res.data.success) {
 							uni.showToast({
 								icon: 'none',
@@ -275,6 +295,7 @@
 			},
 			GetPODetail() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/PO/GetPODetail', //仅为示例，并非真实接口地址。
 					data: {
@@ -287,6 +308,7 @@
 					header: that.post_header,
 					success: (res) => {
 						that.ErrRequestShow(res)
+						that.loading_wait_show = false
 						if (res.data.success) {
 							let arr = res.data.result
 							for (let i = 0; i < arr.length; i++) {
@@ -307,6 +329,7 @@
 			},
 			GetReceiveRecord() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/po/GetReceiveRecord', //仅为示例，并非真实接口地址。
 					data: {
@@ -319,6 +342,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						that.ErrRequestShow(res)
 						if (res.data.success == true) {
 							that.InventoryList_data = res.data.result
@@ -328,6 +352,7 @@
 			},
 			SubmitByBillCode() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/Scan/SubmitByBillCode', //仅为示例，并非真实接口地址。
 					data: {
@@ -339,6 +364,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						if (res.data.success == true) {
 							that.alert_modal = '提交清点成功'
 							that.alertModal_show = true

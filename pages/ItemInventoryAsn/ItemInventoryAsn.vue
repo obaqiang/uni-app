@@ -18,6 +18,7 @@
 		 v-bind:data_g="InventoryList_data_detail.giveQty" v-bind:show_modal_header="show_modal_header"
 		 v-bind:show_modal_body="show_modal_body" v-bind:show_modal_from="show_modal_from" v-on:showModalBtnA="showModalBtnA"
 		 v-if="record_modal_show" />
+		  <loadingWait v-if="loading_wait_show"/>
 	</view>
 </template>
 
@@ -29,6 +30,7 @@
 	import alertModal from "../components/alertModal/alertModal.vue"
 	import InventoryList from "../components/InventoryList/InventoryList.vue"
 	import RecordModal from "../components/RecordModal/RecordModal.vue"
+	import loadingWait from "../components/loadingWait/loadingWait.vue"
 	import {
 		mapState,
 		mapMutations
@@ -42,7 +44,8 @@
 			MaterialInventoryModal,
 			alertModal,
 			InventoryList,
-			RecordModal
+			RecordModal,
+			loadingWait
 		},
 
 		data() {
@@ -88,7 +91,8 @@
 				record_data_g: '',
 				ReceiveRecordId: '',
 				positionTop: '',
-				PurchaseOrderInquirybodyC_from: 'ItemInventoryAsn'
+				PurchaseOrderInquirybodyC_from: 'ItemInventoryAsn',
+				loading_wait_show:false
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -189,6 +193,7 @@
 			},
 			SaveReceive() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/Asn/SaveReceive', //仅为示例，并非真实接口地址。
 					data: {
@@ -204,6 +209,7 @@
 					method: 'POST',
 					header: that.post_header,
 					success: (res) => {
+						that.loading_wait_show = true
 						console.log(res.data)
 						if (res.data.success != true) {
 							that.ErrRequestShow(res)
@@ -222,6 +228,7 @@
 			},
 			DeleteReceiveRecord() {
 				let that = this
+				that.loading_wait_show = false
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/asn/DeleteReceiveRecord',
 					data: {
@@ -234,6 +241,7 @@
 					method: 'POST',
 					header: that.post_header,
 					success: (res) => {
+						that.loading_wait_show = false
 						console.log(res.data)
 						if (res.data.success) {
 							uni.showToast({
@@ -252,6 +260,7 @@
 			},
 			ModifyReceiveRecord() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/asn/ModifyReceiveRecord',
 					data: {
@@ -265,6 +274,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						if (res.data.success) {
 							uni.showToast({
 								icon: 'none',
@@ -282,6 +292,7 @@
 			},
 			GetAsnDetail() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/Asn/GetAsnDetail', //仅为示例，并非真实接口地址。
 					data: {
@@ -293,6 +304,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res)
+						that.loading_wait_show= false
 						if (res.data.success) {
 							let arr = res.data.result
 							for (let i = 0; i < arr.length; i++) {
@@ -315,6 +327,7 @@
 			},
 			GetReceiveRecord() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/po/GetReceiveRecord', 
 					data: {
@@ -326,6 +339,7 @@
 					method: 'POST',
 					header: that.post_header,
 					success: (res) => {
+						that.loading_wait_show = false
 						console.log(res.data)
 						that.ErrRequestShow(res)
 						if (res.data.success == true) {
@@ -336,6 +350,7 @@
 			},
 			SubmitByBillCode() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/Scan/SubmitByBillCode', 
 					data: {
@@ -347,6 +362,7 @@
 					header: that.post_header,
 					success: (res) => {
 						console.log(res.data)
+						that.loading_wait_show = false
 						that.ErrRequestShow(res)
 						if (res.data.success == true) {
 							that.alert_modal = '提交清点成功'

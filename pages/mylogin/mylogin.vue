@@ -33,6 +33,7 @@
 		<copyRightIntro />
 		<showModal v-if="ifshowmodal" v-bind:show_modal_header="show_modal_header" v-bind:show_modal_body="show_modal_body"
 		 v-bind:show_modal_from="show_modal_from" v-bind:updata_url="updata_url" v-on:showModalsuccess="showModalsuccess()" />
+		 <loadingWait v-if="loading_wait_show"/>
 	</view>
 </template>
 
@@ -40,6 +41,7 @@
 	import copyRightIntro from "../components/copyRightIntro/copyRightIntro.vue"
 	import choServerModal from "../components/choServerModal/choServerModal.vue"
 	import showModal from "../components/showModal/showModal.vue"
+	import loadingWait from "../components/loadingWait/loadingWait.vue"
 	import {
 		mapState,
 		mapMutations
@@ -48,9 +50,9 @@
 		components: {
 			copyRightIntro,
 			choServerModal,
-			showModal
+			showModal,
+			loadingWait
 		},
-
 		data() {
 			return {
 				ali_no_hook: "../../static/img/ali_no_hook.png",
@@ -79,7 +81,8 @@
 				err: '',
 				rember_login: false,
 				password_type: 'password',
-				// positionTop: 0
+				// positionTop: 0,
+				loading_wait_show:false
 			};
 		},
 		// computed: mapState(['connect_url']),
@@ -103,7 +106,6 @@
 				return this.$t('mylogin')
 			},
 		},
-
 		methods: {
 			...mapMutations(['MacInfo']),
 			...mapMutations(['changeToken']),
@@ -134,7 +136,6 @@
 				}
 				
 				this.ClientLogin()
-
 			},
 			choServer() {
 				this.showchoservermodal = !this.showchoservermodal
@@ -173,6 +174,7 @@
 			},
 			ClientLogin() {
 				let that = this
+				that.loading_wait_show = true
 				that.MacInfo()
 				uni.request({
 					url: that.connect_url + 'api/Account/ClientLogin', //仅为示例，并非真实接口地址。
@@ -182,7 +184,6 @@
 						password: that.password,
 						deviceType: that.deviceType,
 						MAC: that.MAC
-
 					},
 					method: 'POST',
 					header: {
@@ -190,7 +191,9 @@
 						'Abp.Localization.CultureName': that.$i18n.locale
 					},
 					success: (res) => {
+						that.loading_wait_show = true
 						that.MyLoginSucRes(res, that)
+						
 						// 						if (res.data.success == true) {
 						// 							if (res.data.result.currentOrgUnit == null) {
 						// 								uni.showToast({
@@ -228,7 +231,6 @@
 						// 							});
 						// 						}
 					}
-
 				});
 			},
 			GetCSVersion() {
@@ -238,7 +240,6 @@
 					data: {
 						TenantId: that.TenantId,
 						ClientCode: that.ClientCode
-
 					},
 					method: 'POST',
 					header: {
@@ -251,16 +252,12 @@
 						if (res.data.result != null) {
 							that.updata_url = that.connect_url + res.data.result.path.replace(/\\/g, '/')
 							if (that.current_version < res.data.result.version) {
-
 								if (res.data.result.updateMode == 1) {
-
 									that.ifshowmodal = true
 									that.show_modal_body = '可升级'
-
 								} else if (res.data.result.updateMode == 1) {
 									// that.show_modal_body = '强制性升级'
 									plus.runtime.openURL(that.updata_url);
-
 								}
 							}
 						} else {
@@ -268,9 +265,6 @@
 								title: '缺失apk文件'
 							})
 						}
-
-
-
 					},
 					fail: (res) => {
 						that.err = JSON.stringify(res)
@@ -279,7 +273,6 @@
 							duration: 2000
 						});
 					}
-
 				});
 			},
 		},
@@ -303,11 +296,9 @@
 		width: 750upx;
 		display: block;
 	}
-
 	page {
 		background: #f2f2f2;
 	}
-
 	.head_login_text_area {
 		width: 700upx;
 		background: #FFFFFF;
@@ -317,18 +308,15 @@
 		border-radius: 10upx;
 		padding-bottom: 50upx;
 	}
-
 	.login_text {
 		font-size: 36upx;
 		line-height: 104upx;
 		text-align: center;
 	}
-
 	.login_username {
 		width: 50upx;
 		height: 50upx;
 	}
-
 	.login_in {
 		display: flex;
 		align-items: center;
@@ -338,27 +326,22 @@
 		width: 650upx;
 		margin: auto;
 	}
-
 	.login_clear {
 		width: 50upx;
 		height: 50upx;
-
 	}
-
 	.login_input {
 		width: 400upx;
 		margin: 50upx;
 		border: none;
 		outline: none;
 	}
-
 	.btn_login {
 		background: #ffb700;
 		color: #FFFFFF;
 		width: 600upx;
 		/* margin-top: 100upx; */
 	}
-
 	.btn_server {
 		color: #ffb700;
 		background: #FFFFFF;
@@ -366,19 +349,16 @@
 		width: 600upx;
 		margin-top: 20upx;
 	}
-
 	.ali_icon {
 		width: 50upx;
 		height: 50upx;
 		margin-left: 50upx;
 	}
-
 	.my_login_hook_area {
 		display: flex;
 		align-items: center;
 		height: 100upx;
 	}
-
 	.my_login_hook_area text {
 		color: #FFB700;
 		margin-left: 30upx;

@@ -1,2 +1,0 @@
-<import src="./DetailsOfRejectionOrdersPurchase.vue.wxml" />
-    <template is="2160e67c" data="{{ ...$root['0'], $root }}"/>

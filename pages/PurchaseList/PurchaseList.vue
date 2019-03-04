@@ -14,11 +14,13 @@
 				{{item.supplierName}}
 			</view>
 		</view>
+		<loadingWait v-if="loading_wait_show"/>
 	</view>
 </template>
 
 <script>
 	import scanInput from "../components/scanInput/scanInput.vue"
+	import loadingWait from "../components/loadingWait/loadingWait.vue"
 	import {
 		mapState,
 		mapMutations
@@ -26,7 +28,8 @@
 	export default {
 
 		components: {
-			scanInput
+			scanInput,
+			loadingWait
 		},
 
 		data() {
@@ -38,7 +41,8 @@
 				BillCode: '',
 				SupplierCode: '',
 				Type: '',
-				result_list: ''
+				result_list: '',
+				loading_wait_show:false
 
 			};
 		},
@@ -65,6 +69,7 @@
 			...mapMutations(['ErrRequestShow']),
 			GetPO() {
 				let that = this
+				that.loading_wait_show = true
 				uni.request({
 					url: that.connect_url + 'api/services/wmspda/PO/GetPO',
 					data: {
@@ -77,7 +82,8 @@
 					method: 'POST',
 					header: that.post_header,
 					success: (res) => {
-						console.log(res.data);
+						// console.log(res.data);
+						that.loading_wait_show = false
 						that.ErrRequestShow(res)
 						if (res.data.success == true) {
 							that.result_list = res.data.result

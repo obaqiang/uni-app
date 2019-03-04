@@ -1,2 +1,0 @@
-<import src="./OrganizationalSwitching.vue.wxml" />
-    <template is="62b0dcb8" data="{{ ...$root['0'], $root }}"/>

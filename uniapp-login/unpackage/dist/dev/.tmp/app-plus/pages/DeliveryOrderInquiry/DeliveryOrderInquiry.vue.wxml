@@ -1,1 +1,0 @@
-<import src="/pages/components/PurchaseOrderInquiryHead/PurchaseOrderInquiryHead.vue.wxml" /><template name="434f68bc"><view class="_view 434f68bc"><template bindgetAsnCode="handleProxy" data-eventid="{{'434f68bc-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'434f68bc-0'],$root}}" is="639cb803"></template></view></template>
